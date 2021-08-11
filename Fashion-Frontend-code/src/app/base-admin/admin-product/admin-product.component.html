@@ -1,0 +1,97 @@
+<div class="panel-header">
+  <div class="header text-center">
+    <div class="d-flex justify-content-center">
+      <div class="row">
+        <form>
+          <div class="input-group no-border">
+            <input type="text" value="" class="form-control" placeholder="Search...">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <i class="now-ui-icons ui-1_zoom-bold"></i>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <h2 class="title">Notifications</h2>
+  </div>
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Danh Sách Sản Phẩm</h4>
+          <td class="text-center">
+            <a target="_blank" href="" class="btn btn-round btn-primary">Thêm Sản Phẩm</a>
+          </td>
+        </div>
+        <div class="card-body">
+          <div class="table-hover">
+            <table class="table">
+              <thead class=" text-primary">
+<!--              <th>Check</th>-->
+              <th>Mã</th>
+              <th>Tên</th>
+              <th>Ảnh</th>
+              <th>Giá</th>
+              <th>Miêu Tả</th>
+              <th>Số Lượng</th>
+              <th>Danh Mục</th>
+              <th>Nhà Cung Cấp</th>
+              <th class="text-right">Công cụ</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let product of productClass">
+<!--                <td>-->
+<!--                  <div class="form-check">-->
+<!--                    <label class="form-check-label">-->
+<!--                      <input class="form-check-input" type="checkbox" checked>-->
+<!--                      <span class="form-check-sign"></span>-->
+<!--                    </label>-->
+<!--                  </div>-->
+<!--                </td>-->
+                <td>{{product.productId}}</td>
+                <td>{{product.name}}</td>
+                <td class="text_align-left"><img style="width:60px; height:60px" class="img-responsive" src="https://unsplash.it/164/90"/></td>
+                <td>{{product.price}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.category.categoryName}}</td>
+                <td>{{product.supplier.supplierName}}</td>
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                    <i class="now-ui-icons ui-2_settings-90"></i>
+                  </button>
+                  <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <hr>
+
+            <div class="d-flex justify-content-center">
+              <div class="row">
+                <tr>
+                  <td class="text-center"></td>
+                  <td class="text-center">
+                    <a href="#" class="btn btn-round btn-default disabled">Xoá</a>
+                  </td>
+                  <td class="text-center">
+                    <a target="_blank" href="" class="btn btn-round btn-primary">Thêm</a>
+                  </td>
+                </tr>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
