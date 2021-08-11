@@ -94,7 +94,7 @@ export class TokenStorageService {
     if (sessionStorage.getItem(TOKEN_KEY)) {  /*this.getToken()*/
       try {
         JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
-          this.roles.push(authority.authority);
+          this.roles.push(authority);
         });
       } catch (e) {
         console.log(e);

@@ -13,23 +13,23 @@ const routes: Routes = [
     path: '',
     redirectTo: '/login',
     pathMatch: 'full',
-  },
+  }/*,
   {
     path: '**',
     redirectTo: 'login'
-  }
+  }*/
   ,
   {
     path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [GuardService],
     children: [{
-        path: 'admin-product',
+        path: '',
         loadChildren: './base-admin/layouts/admin-layout/admin-layout.module#AdminLayoutModule',
     }]
   },
   {
-    path: 'home',
+    path: 'user',
     component: UserLayoutComponent,
     children: [
       {

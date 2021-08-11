@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.isLoggedIn = true;
         this.roles = this.token.getAuthorities();
         this.router.navigateByUrl(this.returnUrl);
+
         this.authenticateUser();
       },
         error => {
@@ -60,12 +61,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   authenticateUser() {
+    console.log(this.token.getToken());
+    console.log(this.token.getAuthorities());
     if (this.token.getToken()) {
+      // this.router.navigate(['admin','admin-product']);
       for (const role of this.token.getAuthorities()) {
+        console.log(role);
         if (role === 'ROLE_ADMIN') {
+          this.router.navigate(['admin', 'product']);
           return true;
         }
-        this.router.navigate(['/admin']);
       }
 
     } else if (this.token.getToken()) {

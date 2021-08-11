@@ -9,11 +9,11 @@ import {AdminUserComponent} from '../../admin-user/admin-user.component';
 import {AdminSupplierComponent} from '../../admin-supplier/admin-supplier.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'admin-product',  component: AdminProductComponent },
-    { path: 'admin-order',    component: AdminOrderComponent },
-    { path: 'admin-category', component: AdminCategoryComponent },
-    { path: 'admin-supplier', component: AdminSupplierComponent },
-    { path: 'admin-user',     component: AdminUserComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'icons',          component: IconsComponent }
+    { path: 'product',  component: AdminProductComponent },
+    { path: 'order',    component: AdminOrderComponent },
+    { path: 'category', component: AdminCategoryComponent },
+    { path: 'supplier', component: AdminSupplierComponent },
+    { path: 'user',     component: AdminUserComponent },
+    { path: 'profile',  component: UserProfileComponent },
+    { path: 'icons',    component: IconsComponent }
 ];
