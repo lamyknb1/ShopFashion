@@ -15,5 +15,19 @@ export class ProductService {
   getListProduct(): Observable<any> {
     return this.http.get<Product[]>(`${this.url}`);
   }
-  // postProduct(): Observable<any>
+  getPageProduct(page: number): Observable<any> {
+    return this.http.get<Product[]>(`${this.url}/page/${page}`);
+  }
+  postProduct(product: Product): Observable<any> {
+    console.log(product);
+    return this.http.post(this.baseUrl, {
+      name: product.name,
+      price: product.price,
+      description: product.description,
+      quantity: product.quantity,
+      pictures: product.pictures,
+      category: product.category,
+      supplier: product.supplier
+    });
+  }
 }

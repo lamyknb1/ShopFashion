@@ -51,13 +51,6 @@ export class TokenStorageService {
   //   window.sessionStorage.removeItem(NAME_KEY);
   //   window.sessionStorage.setItem(NAME_KEY, name);
   // }
-  // public saveUsername(username: string) {
-  //   window.sessionStorage.removeItem(USERNAME_KEY);
-  //   window.sessionStorage.setItem(USERNAME_KEY, JSON.stringify(username));
-  // }
-  // public getUsername(): string {
-  //   return sessionStorage.getItem(USERNAME_KEY);
-  // }
   // public getUser() {
   //   return JSON.parse(sessionStorage.getItem(USER_KEY));
   // }
@@ -68,11 +61,12 @@ export class TokenStorageService {
   //   window.sessionStorage.removeItem(ID_KEY);
   //   window.sessionStorage.setItem(ID_KEY, userId);
   // }
-  public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    // Check whether the token is expired and return
-    // true or false
-    return true;
+  public saveUsername(username: string) {
+    window.sessionStorage.removeItem(USERNAME_KEY);
+    window.sessionStorage.setItem(USERNAME_KEY, JSON.stringify(username));
+  }
+  public getUsername(): string {
+    return sessionStorage.getItem(USERNAME_KEY);
   }
   public saveToken(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);

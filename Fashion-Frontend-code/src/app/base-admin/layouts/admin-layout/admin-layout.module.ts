@@ -15,14 +15,15 @@ import {AdminUserComponent} from '../../admin-user/admin-user.component';
 import {AdminSupplierComponent} from '../../admin-supplier/admin-supplier.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
-    FormsModule,
-    ChartsModule,
-    NgbModule,
-    ToastrModule.forRoot()
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(AdminLayoutRoutes),
+        FormsModule,
+        ChartsModule,
+        NgbModule,
+        ToastrModule.forRoot(),
+        ReactiveFormsModule
+    ],
   declarations: [
     UserProfileComponent,
     IconsComponent,

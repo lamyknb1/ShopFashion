@@ -17,15 +17,45 @@
     <h2 class="title">Notifications</h2>
   </div>
 </div>
+<!--<div class="panel-header panel-header-sm">-->
+<!--    <div class="header text-center">-->
+<!--      <div class="d-flex justify-content-center">-->
+<!--        <div class="row">-->
+<!--          <form>-->
+<!--            <div class="input-group no-border">-->
+<!--              <input type="text" value="" class="form-control" placeholder="Search...">-->
+<!--              <div class="input-group-append">-->
+<!--                <div class="input-group-text">-->
+<!--                  <i class="now-ui-icons ui-1_zoom-bold"></i>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <h2 class="title">Notifications</h2>-->
+<!--    </div>-->
+<!--</div>-->
 <div class="main-content">
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title"> Danh Sách Sản Phẩm</h4>
-          <td class="text-center">
-            <a target="_blank" href="" class="btn btn-round btn-primary">Thêm Sản Phẩm</a>
-          </td>
+          <div class="text-center">
+            <a class="btn btn-round btn-primary" data-toggle="modal" data-target="#myModal" >Thêm Sản Phẩm</a>
+          </div>
+          <div class="mt-3 justify-content-center">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination d-flex justify-content-md-end justify-content-center">
+                <li class="page-item"><a class="page-link" (click)="firstPage()">Đầu</a></li>
+                <li class="page-item"><a class="page-link" (click)="previousPage()">Trang trước</a></li>
+                <li class="page-item"><a class="page-link">{{page}}</a></li>
+                <li class="page-item"><a class="page-link" (click)="nextPage()">Trang kế</a></li>
+                <li class="page-item"><a class="page-link" (click)="lastPage()">Cuối</a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
         <div class="card-body">
           <div class="table-hover">
@@ -43,7 +73,7 @@
               <th class="text-right">Công cụ</th>
               </thead>
               <tbody>
-              <tr *ngFor="let product of productClass">
+              <tr *ngFor="let product of productPage">
 <!--                <td>-->
 <!--                  <div class="form-check">-->
 <!--                    <label class="form-check-label">-->
@@ -54,14 +84,17 @@
 <!--                </td>-->
                 <td>{{product.productId}}</td>
                 <td>{{product.name}}</td>
-                <td class="text_align-left"><img style="width:60px; height:60px" class="img-responsive" src="https://unsplash.it/164/90"/></td>
-                <td>{{product.price}}</td>
+                <td><img [src]="product.pictures" alt="Card" height="60px" width="60px"></td>
+                <td>{{product.price | currency : 'vnđ'+' ':'symbol' : '1.0-0'}}</td>
                 <td>{{product.description}}</td>
                 <td>{{product.quantity}}</td>
                 <td>{{product.category.categoryName}}</td>
                 <td>{{product.supplier.supplierName}}</td>
                 <td class="td-actions text-right">
                   <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                  </button>
+                  <button type="button" rel="tooltip" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
                     <i class="now-ui-icons ui-2_settings-90"></i>
                   </button>
                   <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
@@ -74,19 +107,33 @@
 
             <hr>
 
-            <div class="d-flex justify-content-center">
-              <div class="row">
-                <tr>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="#" class="btn btn-round btn-default disabled">Xoá</a>
-                  </td>
-                  <td class="text-center">
-                    <a target="_blank" href="" class="btn btn-round btn-primary">Thêm</a>
-                  </td>
-                </tr>
-              </div>
+            <div class="mt-3 justify-content-center">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination d-flex justify-content-md-end justify-content-center">
+                  <li class="page-item"><a class="page-link" (click)="firstPage()">Đầu</a></li>
+                  <li class="page-item"><a class="page-link" (click)="previousPage()">Trang trước</a></li>
+                  <li class="page-item"><a class="page-link">{{page}}</a></li>
+                  <li class="page-item"><a class="page-link" (click)="nextPage()">Trang kế</a></li>
+                  <li class="page-item"><a class="page-link" (click)="lastPage()">Cuối</a></li>
+                </ul>
+              </nav>
             </div>
+
+<!--            <hr>-->
+
+<!--            <div class="d-flex justify-content-center">-->
+<!--              <div class="row">-->
+<!--                <tr>-->
+<!--                  <td class="text-center"></td>-->
+<!--                  <td class="text-center">-->
+<!--                    <a class="btn btn-round btn-default disabled">Xoá</a>-->
+<!--                  </td>-->
+<!--                  <td class="text-center">-->
+<!--                    <a target="_blank" class="btn btn-round btn-primary">Thêm</a>-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--              </div>-->
+<!--            </div>-->
 
 
           </div>
@@ -95,3 +142,99 @@
     </div>
   </div>
 </div>
+
+<!-- them moi -->
+<form name="form"
+      [formGroup]="productForm"
+      (ngSubmit)="productForm.valid && createProduct()" novalidate>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        </button>
+        <h4 class="modal-title" id="modalLabel">Sản Phẩm Mới</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="control-label col-xs-3" name="fieldName" ngDefaultControl >Tên Sản Phẩm</label>
+          <div class="col-xs-9">
+            <input type="text" class="form-control" formControlName="name" placeholder="(ví dụ: mtp)" >
+            <div class="alert-danger" *ngIf="productForm.get('name').invalid && productForm.get('name').touched"
+                 style="color: red">
+              Tên sản phẩm ít nhất 1 ký tự!
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-xs-3" name="fieldName" ngDefaultControl >Giá</label>
+          <div class="col-xs-9">
+            <input type="number" class="form-control" formControlName="price" >
+            <div class="alert-danger" *ngIf="productForm.get('price').invalid && productForm.get('price').touched" style="color: red">
+              Giá tiền hơn hơn hoặc bằng 0!
+            </div>
+          </div>
+        </div>  <!--gia tien-->
+        <div class="form-group">
+          <label class="control-label col-xs-3" name="fieldName" ngDefaultControl >Miêu tả</label>
+          <div class="col-xs-9">
+            <textarea class="form-control h-auto" formControlName="description" ></textarea>
+            <div class="alert-danger" *ngIf="productForm.get('description').invalid && productForm.get('description').touched"
+                 style="color: red">
+              Không để trống miêu tả!
+            </div>
+          </div>
+        </div>  <!--mien ta-->
+        <div class="form-group">
+          <label class="control-label col-xs-3" name="fieldName" ngDefaultControl >Số Lượng</label>
+          <div class="col-xs-9">
+            <input type="number" class="form-control" formControlName="quantity"/>
+            <div class="alert-danger" *ngIf="productForm.get('quantity').invalid && productForm.get('quantity').touched"
+                 style="color: red">
+              Số lượng lớn hơn hoặc bằng 0!!
+            </div>
+          </div>
+        </div>  <!--so luong-->
+        <div class="form-group">
+          <label class="control-label col-xs-3" name="fieldName" ngDefaultControl >Danh Mục</label>
+          <div class="col-xs-9">
+<!--            <input type="text" class="form-control" placeholder="..." >-->
+            <select class="form-control" (change)="selectCategory(addC.value)" #addC>
+              <option value="null">Select category</option>
+              <option *ngFor="let a of categoryList" value="{{a.categoryId}}">{{a.categoryName}}</option>
+            </select>
+          </div>
+
+        </div>  <!--danh muc-->
+        <div class="form-group">
+          <label class="control-label col-xs-3" name="fieldName" ngDefaultControl >Nhà Sản xuất</label>
+          <div class="col-xs-9">
+<!--            <input type="text" class="form-control" placeholder="..." >-->
+            <select class="form-control" (change)="selectSupplier(addS.value)" #addS>
+              <option value="null">Select category</option>
+              <option *ngFor="let a of supplierList" value="{{a.supplierId}}">{{a.supplierName}}</option>
+            </select>
+          </div>
+          </div>  <!--nha san xuat-->
+        <div class="form-group">
+          <label class="control-label col-xs-3" name="fieldName" ngDefaultControl >Ảnh</label>
+          <div class="col-xs-9">
+            <input type="file" class="form-control" accept="image/*">
+          </div>
+          <div class="form-group" style="height: 100px; width: 100px">
+            <div class="image-preview" >
+              <div class="btn-info float-left" >
+                <img width="100" height="100"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Đồng Ý</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>

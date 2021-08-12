@@ -1,3 +1,5 @@
+import {Picture} from './picture';
+
 export class Product {
   productId?: number;
   name?: string;
@@ -12,5 +14,6 @@ export class Product {
     supplierId?: number;
     supplierName?: string;
   };
+  pictures?: any[];
   // date?: string;
 }

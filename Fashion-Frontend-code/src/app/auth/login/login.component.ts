@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.token.saveToken(data.token);
         this.token.saveAuthorities(data.roles);
         this.token.saveUser(data);
+        this.token.saveUsername(data.username);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
@@ -61,35 +62,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   authenticateUser() {
-    console.log(this.token.getToken());
-    console.log(this.token.getAuthorities());
     if (this.token.getToken()) {
-      // this.router.navigate(['admin','admin-product']);
       for (const role of this.token.getAuthorities()) {
-        console.log(role);
-        if (role === 'ROLE_ADMIN') {
+        if (role === 'ROLE_ADMIN' || role === 'ROLE_PM') {
           this.router.navigate(['admin', 'product']);
           return true;
         }
-      }
-
-    } else if (this.token.getToken()) {
-      for (const role of this.token.getAuthorities()) {
-        if (role === 'ROLE_PM') {
-          return true;
-        }
-        this.router.navigate(['/admin']);
-      }
-    } else if (this.token.getToken()) {
-      for (const role of this.token.getAuthorities()) {
         if (role === 'ROLE_USER') {
+          this.router.navigate(['admin', 'category']);
           return true;
         }
-        this.router.navigate(['/home']);
       }
     }
   }
-
   reloadPage() {
     window.location.reload();
   }

@@ -16,7 +16,6 @@ import { httpInterceptorProviders } from './auth/helpers/auth-interceptor';
 import { HomeComponent } from './base-user/components/home/home.component';
 
 
-
 @NgModule({
     imports: [
         BrowserAnimationsModule,
