@@ -1,6 +1,6 @@
 import {Product} from './product';
 
-export class Picture {
+export interface Picture {
   pictureId?: number;
   src?: string;
   product?: Product;

@@ -3,5 +3,5 @@ import {UserProductComponent} from '../../user-product/user-product.component';
 
 
 export const UserLayoutRoutes: Routes = [
-  { path: 'admin-product',  component: UserProductComponent }
+  { path: 'product-user',  component: UserProductComponent }
 ];

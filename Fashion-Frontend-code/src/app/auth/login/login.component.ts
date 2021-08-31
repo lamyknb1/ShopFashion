@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           return true;
         }
         if (role === 'ROLE_USER') {
-          this.router.navigate(['admin', 'category']);
+          this.router.navigate(['home', 'product-user']);
           return true;
         }
       }

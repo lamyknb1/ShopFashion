@@ -7,6 +7,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr';
 import {UserLayoutRoutes} from './user-layout.routing';
 import {UserProductComponent} from '../../user-product/user-product.component';
+import {CartComponent} from '../../cart/cart.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {UserProductComponent} from '../../user-product/user-product.component';
     ToastrModule.forRoot()
   ],
   declarations: [
-    UserProductComponent
+    UserProductComponent,
+    CartComponent
   ]
 })
 

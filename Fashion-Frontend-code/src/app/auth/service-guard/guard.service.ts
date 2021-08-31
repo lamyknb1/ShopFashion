@@ -16,11 +16,15 @@ export class GuardService implements CanActivate{
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if (this.token.getToken()) {
       for (const role of this.token.getAuthorities()) {
-        if (role === 'ROLE_ADMIN' || role === 'ROLE_PM' || role === 'ROLE_USER') {
+        if (role === 'ROLE_ADMIN' || role === 'ROLE_PM') {
           return true;
         }
-        return false;
       }
+      this.router.navigate(['/home']);
+      return false;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
     }
   }
 }

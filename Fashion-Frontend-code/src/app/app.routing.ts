@@ -29,8 +29,9 @@ const routes: Routes = [
     }]
   },
   {
-    path: 'user',
+    path: 'home',
     component: UserLayoutComponent,
+    canActivate: [GuardService],
     children: [
       {
         path: '',
