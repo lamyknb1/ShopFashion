@@ -2,7 +2,7 @@
   <div class="header text-center">
     <h2 class="title">Notifications</h2>
     <p class="category">Please checkout the
-      <a href="https://scttcper.github.io/ngx-toastr/" target="_blank">full documentation.</a>
+      <a target="_blank">full documentation.</a>
     </p>
   </div>
 </div>
@@ -15,27 +15,40 @@
         </div>
         <div class="card-body">
           <div class="alert alert-info">
-            <span>This is a plain notification</span>
-          </div>
-          <div class="alert alert-info">
-            <button type="button" aria-hidden="true" class="close">
-              <i class="now-ui-icons ui-1_simple-remove"></i>
-            </button>
-            <span>This is a notification with close button.</span>
-          </div>
-          <div class="alert alert-info alert-with-icon" data-notify="container">
-            <button type="button" aria-hidden="true" class="close">
-              <i class="now-ui-icons ui-1_simple-remove"></i>
-            </button>
-            <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
-            <span data-notify="message">This is a notification with close button and icon.</span>
-          </div>
-          <div class="alert alert-info alert-with-icon" data-notify="container">
-            <button type="button" aria-hidden="true" class="close">
-              <i class="now-ui-icons ui-1_simple-remove"></i>
-            </button>
-            <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
-            <span data-notify="message">This is a notification with close button and icon and have many lines. You can see that the icon and the close button are always vertically aligned. This is a beautiful notification. So you don't have to worry about the style.</span>
+            <div class="card-body">
+              <div class="table-hover"> <!--table-responsive-->
+                <table class="table">
+                  <thead class=" text-primary">
+<!--                  <th>Check</th>-->
+                  <th>Mã</th>
+                  <th>Tên Danh Mục</th>
+                  <th class="text-right">Công cụ</th>
+                  </thead>
+                  <tbody style="color: #FA037E">
+                  <tr *ngFor="let category of categoryClass">
+<!--                    <td>-->
+<!--                      <div class="form-check">-->
+<!--                        <label class="form-check-label">-->
+<!--                          <input class="form-check-input" type="checkbox" checked>-->
+<!--                          <span class="form-check-sign"></span>-->
+<!--                        </label>-->
+<!--                      </div>-->
+<!--                    </td>-->
+                    <td>{{category.categoryId}}</td>
+                    <td>{{category.categoryName}}</td>
+                    <td class="td-actions text-right">
+                      <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                      </button>
+                      <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -44,6 +57,79 @@
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Kích Thước Sản Phẩm</h4>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-success">
+            <div class="card-body">
+              <div class="table-hover"> <!--table-responsive-->
+                <table class="table">
+                  <thead class=" text-primary">
+                  <!--                  <th>Check</th>-->
+                  <th>Mã</th>
+                  <th>Kích Cỡ</th>
+                  <th class="text-right">Công cụ</th>
+                  </thead>
+                  <tbody style="color: black">
+                  <tr *ngFor="let size of sizeClass">
+                    <td>{{size.sizeId}}</td>
+                    <td>{{size.sizeName}}</td>
+                    <td class="td-actions text-right">
+                      <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                      </button>
+                      <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Màu Sắc Sản Phẩm</h4>
+        </div>
+        <div class="card-body">
+          <div class="alert alert-warning">
+            <div class="card-body">
+              <div class="table-hover"> <!--table-responsive-->
+                <table class="table">
+                  <thead class=" text-primary">
+                  <th>Mã</th>
+                  <th>Màu sắc</th>
+                  <th class="text-right">Công cụ</th>
+                  </thead>
+                  <tbody style="color: black">
+                  <tr *ngFor="let color of colorsClass">
+                    <td>{{color.colorId}}</td>
+                    <td>{{color.colorName}}</td>
+                    <td class="td-actions text-right">
+                      <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                      </button>
+                      <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">DEMO</h4>
         </div>
         <div class="card-body">
           <div class="alert alert-primary">
@@ -85,50 +171,7 @@
       </div>
     </div>
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-          <div class="places-buttons">
-            <div class="row">
-              <div class="col-md-6 ml-auto mr-auto text-center">
-                <h4 class="card-title">
-                  Notifications Places
-                  <p class="category">Click to view notifications</p>
-                </h4>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-8 ml-auto mr-auto">
-                <div class="row">
-                  <div class="col-md-4">
-                    <button class="btn btn-primary btn-block" (click)="showNotification('top','left')">Top Left</button>
-                  </div>
-                  <div class="col-md-4">
-                    <button class="btn btn-primary btn-block" (click)="showNotification('top','center')">Top Center</button>
-                  </div>
-                  <div class="col-md-4">
-                    <button class="btn btn-primary btn-block" (click)="showNotification('top','right')">Top Right</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-8 ml-auto mr-auto">
-                <div class="row">
-                  <div class="col-md-4">
-                    <button class="btn btn-primary btn-block" (click)="showNotification('bottom','left')">Bottom Left</button>
-                  </div>
-                  <div class="col-md-4">
-                    <button class="btn btn-primary btn-block" (click)="showNotification('bottom','center')">Bottom Center</button>
-                  </div>
-                  <div class="col-md-4">
-                    <button class="btn btn-primary btn-block" (click)="showNotification('bottom','right')">Bottom Right</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
+

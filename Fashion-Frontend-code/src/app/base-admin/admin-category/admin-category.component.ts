@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
+import {CategoryService} from '../../services/category.service';
+import {Subscription} from 'rxjs';
+import {Category} from '../../models/category';
+import {SizeService} from '../../services/size.service';
+import {Size} from '../../models/size';
+import {ColorService} from '../../services/color.service';
+import {Colors} from '../../models/colors';
 
 @Component({
   selector: 'app-admin-category',
@@ -8,61 +15,51 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class AdminCategoryComponent implements OnInit {
 
-  constructor(private toastr: ToastrService) {}
-  showNotification(from, align){
+  private subscription: Subscription;
+  private categoryClass: Category[];
+  private sizeClass: Size[];
+  private colorsClass: Colors[];
+  constructor(private toasterService: ToastrService,
+              private categoryService: CategoryService,
+              private sizeService: SizeService,
+              private colorsService: ColorService) {}
 
-    const color = Math.floor((Math.random() * 5) + 1);
-
-    switch(color){
-      case 1:
-        this.toastr.info('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-          timeOut: 8000,
-          closeButton: true,
-          enableHtml: true,
-          toastClass: "alert alert-info alert-with-icon",
-          positionClass: 'toast-' + from + '-' +  align
-        });
-        break;
-      case 2:
-        this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-          timeOut: 8000,
-          closeButton: true,
-          enableHtml: true,
-          toastClass: "alert alert-success alert-with-icon",
-          positionClass: 'toast-' + from + '-' +  align
-        });
-        break;
-      case 3:
-        this.toastr.warning('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-          timeOut: 8000,
-          closeButton: true,
-          enableHtml: true,
-          toastClass: "alert alert-warning alert-with-icon",
-          positionClass: 'toast-' + from + '-' +  align
-        });
-        break;
-      case 4:
-        this.toastr.error('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-          timeOut: 8000,
-          enableHtml: true,
-          closeButton: true,
-          toastClass: "alert alert-danger alert-with-icon",
-          positionClass: 'toast-' + from + '-' +  align
-        });
-        break;
-      case 5:
-        this.toastr.show('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-          timeOut: 8000,
-          closeButton: true,
-          enableHtml: true,
-          toastClass: "alert alert-primary alert-with-icon",
-          positionClass: 'toast-' + from + '-' +  align
-        });
-        break;
-      default:
-        break;
-    }
-  }
   ngOnInit() {
+    this.listCategory();
+    this.listSize();
+    this.listColor();
+  }
+  listCategory() {
+    this.subscription = this.categoryService.getListCategory().subscribe(
+      data => {
+        this.categoryClass = data;
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  listSize() {
+    this.subscription = this.sizeService.getSizeList().subscribe(
+      data => {
+        this.sizeClass = data;
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  listColor() {
+    this.subscription = this.colorsService.getColorList().subscribe(
+      data => {
+        this.colorsClass = data;
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

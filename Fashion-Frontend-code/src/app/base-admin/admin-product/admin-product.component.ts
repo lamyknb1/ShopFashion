@@ -114,9 +114,10 @@ export class AdminProductComponent implements OnInit {
     this.product.category = this.category;
     this.product.supplier = this.supplier;
     this.productService.postProduct(this.product).subscribe(next => {
-      this.message = true;
-      alert('Thêm Thành Công!');
       this.ngOnInit();
+      // this.message = true;
+      alert('Thêm Thành Công!');
+      this.lastPage();
     });
   }
   selectCategoryById(id) {
@@ -186,7 +187,7 @@ export class AdminProductComponent implements OnInit {
     }
     setTimeout(() => {
       this.createProduct();
-    }, 10);
+    }, 2);
   }
   preview() {
     // Show preview

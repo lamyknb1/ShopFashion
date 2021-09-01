@@ -18,13 +18,13 @@ export class SupplierService {
   getSupplierById(id: number): Observable<Supplier> {
     return this.http.get<Supplier>(`${this.API_URL}/${id}`);
   }
-  createSupplier(supplier: Supplier): Observable<Supplier> {
+  postSupplier(supplier: Supplier): Observable<Supplier> {
     return this.http.post<Supplier>(this.API_URL, supplier);
   }
   deleteSupplier(id: number): Observable<any> {
     return this.http.delete(`${this.API_URL}/${id}`);
   }
-  updateSupplier(supplier: Supplier): Observable<Supplier> {
+  putSupplier(supplier: Supplier): Observable<Supplier> {
     return this.http.put<Supplier>(`${this.API_URL}/${supplier.supplierId}`, supplier);
   }
 }
