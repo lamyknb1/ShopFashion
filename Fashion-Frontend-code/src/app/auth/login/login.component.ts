@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.token.getToken()) {
       for (const role of this.token.getAuthorities()) {
         if (role === 'ROLE_ADMIN' || role === 'ROLE_PM') {
-          this.router.navigate(['admin', 'product']);
+          this.router.navigate(['admin', 'home']);
           return true;
         }
         if (role === 'ROLE_USER') {

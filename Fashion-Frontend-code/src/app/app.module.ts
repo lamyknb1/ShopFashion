@@ -13,7 +13,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { UserLayoutComponent } from './base-user/layouts/user-layout/user-layout.component';
 import { httpInterceptorProviders } from './auth/helpers/auth-interceptor';
-import { HomeComponent } from './base-user/components/home/home.component';
+import { ProductUpdateComponent } from './base-admin/product/product-update/product-update.component';
+
 
 
 @NgModule({
@@ -34,8 +35,6 @@ import { HomeComponent } from './base-user/components/home/home.component';
     UserLayoutComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
-
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

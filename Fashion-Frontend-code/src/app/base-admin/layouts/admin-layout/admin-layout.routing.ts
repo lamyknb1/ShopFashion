@@ -2,18 +2,20 @@ import { Routes } from '@angular/router';
 
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { IconsComponent } from '../../icons/icons.component';
-import {AdminProductComponent} from '../../admin-product/admin-product.component';
-import {AdminOrderComponent} from '../../admin-order/admin-order.component';
-import {AdminCategoryComponent} from '../../admin-category/admin-category.component';
-import {AdminUserComponent} from '../../admin-user/admin-user.component';
-import {AdminSupplierComponent} from '../../admin-supplier/admin-supplier.component';
+import {ProductActionComponent} from '../../product/product-action/product-action.component';
+import {ProductCreateComponent} from '../../product/product-create/product-create.component';
+import {ProductDeleteComponent} from '../../product/product-delete/product-delete.component';
+import {ProductUpdateComponent} from '../../product/product-update/product-update.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'product',  component: AdminProductComponent },
-    { path: 'order',    component: AdminOrderComponent },
-    { path: 'category', component: AdminCategoryComponent },
-    { path: 'supplier', component: AdminSupplierComponent },
-    { path: 'user',     component: AdminUserComponent },
+    { path: 'home',             component: ProductActionComponent},
+    { path: 'product-create',   component: ProductCreateComponent},
+    { path: 'product-delete',   component: ProductDeleteComponent},
+    { path: 'product-update',   component: ProductUpdateComponent},
+    { path: 'order',    component: null},
+    { path: 'category', component: null},
+    { path: 'supplier', component: null},
+    { path: 'user',     component: null},
     { path: 'profile',  component: UserProfileComponent },
     { path: 'icons',    component: IconsComponent }
 ];

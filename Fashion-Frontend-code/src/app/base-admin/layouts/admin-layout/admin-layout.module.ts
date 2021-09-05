@@ -8,11 +8,11 @@ import { IconsComponent } from '../../icons/icons.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
-import {AdminProductComponent} from '../../admin-product/admin-product.component';
-import {AdminOrderComponent} from '../../admin-order/admin-order.component';
-import {AdminCategoryComponent} from '../../admin-category/admin-category.component';
-import {AdminUserComponent} from '../../admin-user/admin-user.component';
-import {AdminSupplierComponent} from '../../admin-supplier/admin-supplier.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {ProductActionComponent} from '../../product/product-action/product-action.component';
+import {ProductCreateComponent} from '../../product/product-create/product-create.component';
+import {ProductDeleteComponent} from '../../product/product-delete/product-delete.component';
+import {ProductUpdateComponent} from '../../product/product-update/product-update.component';
 
 @NgModule({
     imports: [
@@ -22,16 +22,16 @@ import {AdminSupplierComponent} from '../../admin-supplier/admin-supplier.compon
         ChartsModule,
         NgbModule,
         ToastrModule.forRoot(),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatFormFieldModule
     ],
   declarations: [
     UserProfileComponent,
     IconsComponent,
-    AdminProductComponent,
-    AdminOrderComponent,
-    AdminCategoryComponent,
-    AdminSupplierComponent,
-    AdminUserComponent
+    ProductActionComponent,
+    ProductCreateComponent,
+    ProductDeleteComponent,
+    ProductUpdateComponent
   ]
 })
 
