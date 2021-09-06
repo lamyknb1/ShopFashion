@@ -14,5 +14,8 @@ export class Product {
     supplierId?: number;
     supplierName?: string;
   };
-  pictures?: Picture[];
+  pictures?: {
+    pictureId?: number;
+    src?: string;
+  };
 }

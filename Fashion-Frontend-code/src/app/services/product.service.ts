@@ -34,7 +34,6 @@ export class ProductService {
     });
   }
   postProduct(product: Product): Observable<any> {
-    console.log(product);
     return this.http.post(this.baseUrl,
     {
       name: product.name,

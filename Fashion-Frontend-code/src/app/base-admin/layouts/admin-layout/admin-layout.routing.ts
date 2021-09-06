@@ -3,9 +3,10 @@ import { Routes } from '@angular/router';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { IconsComponent } from '../../icons/icons.component';
 import {ProductActionComponent} from '../../product/product-action/product-action.component';
-import {ProductCreateComponent} from '../../product/product-create/product-create.component';
+
 import {ProductDeleteComponent} from '../../product/product-delete/product-delete.component';
 import {ProductUpdateComponent} from '../../product/product-update/product-update.component';
+import {ProductCreateComponent} from '../../product/product-create/product-create.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'home',             component: ProductActionComponent},

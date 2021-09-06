@@ -4,11 +4,12 @@ import {ProductService} from '../../../services/product.service';
 import {TokenStorageService} from '../../../auth/service-auth/token-storage.service';
 import {CategoryService} from '../../../services/category.service';
 import { Subscription } from 'rxjs/internal/Subscription';
-
 import { FormBuilder } from '@angular/forms';
 import {Router} from '@angular/router';
 import {SupplierService} from '../../../services/supplier.service';
 import {PictureService} from '../../../services/picture.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {ProductCreateComponent} from '../product-create/product-create.component';
 
 @Component({
   selector: 'app-product-action',
@@ -31,7 +32,8 @@ export class ProductActionComponent implements OnInit {
               private supplierService: SupplierService,
               private pictureService: PictureService,
               private fb: FormBuilder,
-              private router: Router
+              private router: Router,
+              public dialog: MatDialog
   ) {
   }
 
@@ -118,5 +120,15 @@ export class ProductActionComponent implements OnInit {
         }
       }
     }
+  }
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
+    this.dialog.open(ProductCreateComponent, dialogConfig);
+  }
+  editProduct() {
+    console.log('edit product');
   }
 }

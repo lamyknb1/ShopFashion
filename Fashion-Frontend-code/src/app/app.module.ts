@@ -13,9 +13,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { UserLayoutComponent } from './base-user/layouts/user-layout/user-layout.component';
 import { httpInterceptorProviders } from './auth/helpers/auth-interceptor';
-import { ProductUpdateComponent } from './base-admin/product/product-update/product-update.component';
-
-
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
     imports: [
@@ -27,7 +26,9 @@ import { ProductUpdateComponent } from './base-admin/product/product-update/prod
         AppRoutingModule,
         NgbModule,
         ToastrModule.forRoot(),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
     ],
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { ProductUpdateComponent } from './base-admin/product/product-update/prod
     LoginComponent,
     RegisterComponent,
   ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders,
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

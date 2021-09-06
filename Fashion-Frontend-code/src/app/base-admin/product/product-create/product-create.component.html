@@ -1,1 +1,35 @@
-<p>product-create works!</p>
+<div mat-dialog-content>Thêm Mới Sản Phẩm
+</div>
+<form class="example-full-width" [formGroup]="productForm" (ngSubmit)="productForm.valid && onSubmit()" novalidate>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Tên Sản Phẩm</mat-label>
+      <input matInput  formControlName="name">
+    </mat-form-field>
+    <div class="form-group" *ngIf="productForm.get('name').invalid && productForm.get('name').touched"
+         style="color: red">
+      Product name must be at least 1 characters
+    </div>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Giá Sản Phẩm</mat-label>
+      <input matInput formControlName="price">
+    </mat-form-field>
+    <div class="form-group" *ngIf="productForm.get('price').invalid && productForm.get('price').touched"
+         style="color: red">
+      Price is greater than or equal to zero
+    </div>
+  </div>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Mô Tả</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+
+  <div class="text-center">
+    <button type="submit" mat-raised-button class="btn btn-round btn-success" (click)="onClick()" >LUU</button>
+    <button mat-raised-button class="btn btn-round btn-default" [mat-dialog-close]="true">HUY</button>
+  </div>
+</form>
