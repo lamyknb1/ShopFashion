@@ -5,7 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgModule} from '@angular/core';
 import { HeaderUserComponent } from './header-user/header-user.component';
 import { FooterUserComponent } from './footer-user/footer-user.component';
-import { SidebarUserComponent } from './sidebar-user/sidebar-user.component';
+import { NavbarUserComponent } from './navbar-user/navbar-user.component';
 
 
 
@@ -18,13 +18,13 @@ import { SidebarUserComponent } from './sidebar-user/sidebar-user.component';
   declarations: [
     HeaderUserComponent,
     FooterUserComponent,
-    SidebarUserComponent,
+    NavbarUserComponent,
 
   ],
   exports: [
     HeaderUserComponent,
     FooterUserComponent,
-    SidebarUserComponent
+    NavbarUserComponent,
   ]
 })
 

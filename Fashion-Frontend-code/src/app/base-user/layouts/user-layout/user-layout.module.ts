@@ -8,6 +8,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {UserLayoutRoutes} from './user-layout.routing';
 import {UserProductComponent} from '../../user-product/user-product.component';
 import {CartComponent} from '../../cart/cart.component';
+import {HomeComponent} from '../../home/home.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {CartComponent} from '../../cart/cart.component';
   ],
   declarations: [
     UserProductComponent,
-    CartComponent
+    CartComponent,
+    HomeComponent
   ]
 })
 
