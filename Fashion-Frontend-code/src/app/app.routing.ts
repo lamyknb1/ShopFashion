@@ -7,6 +7,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { UserLayoutComponent } from './base-user/layouts/user-layout/user-layout.component';
 import { GuardService } from './auth/service-guard/guard.service';
+import { UserGuardService} from './auth/service-guard/user-guard.service';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: UserLayoutComponent,
-    canActivate: [GuardService],
+    canActivate: [UserGuardService],
     children: [
       {
         path: '',

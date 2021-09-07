@@ -15,9 +15,7 @@ import { UserLayoutComponent } from './base-user/layouts/user-layout/user-layout
 import { httpInterceptorProviders } from './auth/helpers/auth-interceptor';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { UserActionComponent } from './base-admin/user/user-action/user-action.component';
 import { UserComponentsModule } from './base-user/components/user-components.module';
-
 
 
 @NgModule({
@@ -25,7 +23,6 @@ import { UserComponentsModule } from './base-user/components/user-components.mod
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    ComponentsModule,
     RouterModule,
     AppRoutingModule,
     NgbModule,
@@ -42,7 +39,6 @@ import { UserComponentsModule } from './base-user/components/user-components.mod
     UserLayoutComponent,
     LoginComponent,
     RegisterComponent,
-    UserActionComponent,
   ],
   providers: [httpInterceptorProviders,
     ],
