@@ -1,10 +1,15 @@
 package thaitay.com.fashion.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "SIZES")
+@Proxy(lazy = false)
 public class Sizes {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_SIZE")
@@ -15,9 +20,8 @@ public class Sizes {
     @Column(name = "SIZE_NAME")
     private String sizeName;
 
-    @OneToMany(mappedBy = "size",targetEntity = ProductDetail.class,
-            cascade = {CascadeType.ALL},
-            fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "size", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<ProductDetail> productDetails;
 
     public Sizes() {
@@ -44,10 +48,9 @@ public class Sizes {
         this.sizeName = sizeName;
     }
 
-//    public List<ProductDetail> getProductDetails() {
-//        return productDetails;
-//    }
-//
+    public List<ProductDetail> getProductDetails() {
+        return productDetails;
+    }
     public void setProductDetails(List<ProductDetail> productDetails) {
         this.productDetails = productDetails;
     }

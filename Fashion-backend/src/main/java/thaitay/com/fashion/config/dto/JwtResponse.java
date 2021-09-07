@@ -8,11 +8,13 @@ public class JwtResponse {
     private String token;
     private String type = "Bearer";
     private List<String> roles;
+    private String username;
 
 
-    public JwtResponse(String accessToken, List<String> roles) {
+    public JwtResponse(String accessToken, List<String> roles, String username) {
         this.token = accessToken;
         this.roles = roles;
+        this.username = username;
     }
 
     public String getToken() {
@@ -37,5 +39,13 @@ public class JwtResponse {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

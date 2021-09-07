@@ -14,7 +14,7 @@ public class ProductDetail {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_PRODUCT_DETAIL")
     @SequenceGenerator(name = "S_PRODUCT_DETAIL", sequenceName = "PRODUCT_DETAIL_SEQ", allocationSize = 1)
     @Column(name = "DETAIL_ID", updatable = false, insertable=false)
-    private Long detaolId;
+    private Long detailId;
     @Column(name = "QUANTITY")
     private long quantity;
     //    private Long salePrice;
@@ -38,12 +38,12 @@ public class ProductDetail {
     public ProductDetail() {
     }
 
-    public Long getDetaolId() {
-        return detaolId;
+    public Long getDetailId() {
+        return detailId;
     }
 
-    public void setDetaolId(Long detaolId) {
-        this.detaolId = detaolId;
+    public void setDetailId(Long detailId) {
+        this.detailId = detailId;
     }
 
     public long getQuantity() {

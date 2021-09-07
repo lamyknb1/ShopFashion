@@ -2,11 +2,13 @@ package thaitay.com.fashion.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "COLOR")
+@Proxy(lazy = false)
 public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_COLOR")
@@ -17,7 +19,7 @@ public class Color {
     @Column(name = "COLOR_NAME")
     private String colorName;
 
-    @OneToMany(mappedBy = "color", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER,targetEntity = ProductDetail.class)
+    @OneToMany(mappedBy = "color", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JsonIgnore
     List<ProductDetail> productDetails;
 

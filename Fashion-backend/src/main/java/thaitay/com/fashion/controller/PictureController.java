@@ -3,17 +3,22 @@ package thaitay.com.fashion.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 import thaitay.com.fashion.entity.Picture;
 import thaitay.com.fashion.service.PictureService;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/auth")
 public class PictureController {
@@ -29,21 +34,25 @@ public class PictureController {
         return new ResponseEntity<>(pictures, HttpStatus.OK);
     }
 
-//    @Transactional
-//    @PostMapping("/picture")
-//    public ResponseEntity<Picture> createPicture(@RequestBody Picture picture, UriComponentsBuilder ucBuilder) {
-//        pictureService.savePicture(picture);
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setLocation(ucBuilder.path("/picture/{id}").buildAndExpand(picture.getPictureId()).toUri());
-//        return new ResponseEntity<>(headers, HttpStatus.CREATED);
-//    }
-
     @Transactional
     @PostMapping("/picture")
-    public ResponseEntity<?> addNewBookPicture(@RequestBody Picture picture) {
-        System.out.println("Creating Book picture ");
+    public ResponseEntity<Picture> createPicture(@RequestBody Picture picture, UriComponentsBuilder ucBuilder) {
         pictureService.savePicture(picture);
-        return new ResponseEntity<Long>(picture.getPictureId(), HttpStatus.CREATED);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/picture/{id}").buildAndExpand(picture.getPictureId()).toUri());
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    @Transactional
+    @PostMapping(value = "/picture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> addNewBookPicture(@RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println("Creating Book picture ");
+        File convertFile = new File("E:\\Work\\SpringBoot" + file.getOriginalFilename());
+        convertFile.createNewFile();
+        FileOutputStream fout = new FileOutputStream(convertFile);
+        fout.write(file.getBytes());
+        fout.close();
+        return new ResponseEntity<String>("file is upload successfully", HttpStatus.CREATED);
     }
 
     @GetMapping("/picture/{id}")

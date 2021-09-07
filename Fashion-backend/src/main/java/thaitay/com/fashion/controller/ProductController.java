@@ -1,13 +1,13 @@
 package thaitay.com.fashion.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import thaitay.com.fashion.entity.Product;
-import thaitay.com.fashion.repository.ProductRepository;
 import thaitay.com.fashion.search.SearchProductByName;
 import thaitay.com.fashion.service.ProductService;
 import javax.validation.Valid;
@@ -114,8 +114,8 @@ public class ProductController {
     public ResponseEntity<List<Product>> getProductWithPaging(
              @PathVariable("pageIndex") Integer page/*,
              @RequestParam(name = "pageSize", defaultValue = "6") Integer size*/) {
-
         List<Product> product = productService.getAllWithPagination(page, 6);
+
         if (product.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

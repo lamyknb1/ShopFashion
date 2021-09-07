@@ -1,7 +1,9 @@
 package thaitay.com.fashion.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Proxy;
@@ -39,13 +41,12 @@ public class Product {
     @JsonIgnore
     private List<Commenter> commenters;
 
-    @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL},targetEntity = ProductDetail.class)
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<ProductDetail> productDetails;
 
-    @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL},targetEntity = Picture.class)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonIgnore
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
+    @JsonManagedReference
     private List<Picture> pictures;
 
     public Product() {

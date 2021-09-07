@@ -20,9 +20,7 @@ public class Payment {
     @Column(name = "PAYMENT_NAME")
     private String paymentName;
 
-    @OneToMany(mappedBy = "payment",targetEntity = Order.class,
-            cascade = {CascadeType.ALL},
-            fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "payment", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Order> orders;
 
