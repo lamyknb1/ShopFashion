@@ -80,7 +80,8 @@
               <tr *ngFor="let product of productPage, let i=index">
                 <td>{{product.productId}}</td>
                 <td>{{product.name}}</td>
-                <td><img alt="image" src="../../../../assets/images/vans/era/Era1.jpg" height="60px" width="60px">
+                <td><img src="../../../../assets/images/vans/era/Era1.jpg"
+                         height="60px" width="60px">
                 <td>{{product.price | currency : 'vnđ'+' ':'symbol' : '1.0-0'}}</td>
                 <td>{{product.description}}</td>
                 <td>{{product.quantity}}</td>

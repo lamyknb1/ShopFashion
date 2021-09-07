@@ -7,15 +7,12 @@ export class Product {
   description?: string;
   quantity?: number;
   category?: {
-    categoryId?: number;
-    categoryName?: string;
+    categoryId?: number,
+    categoryName?: string
   };
   supplier?: {
-    supplierId?: number;
-    supplierName?: string;
+    supplierId?: number,
+    supplierName?: string
   };
-  pictures?: {
-    pictureId?: number;
-    src?: string;
-  };
+  picture?: Picture[];
 }

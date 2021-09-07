@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
-
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { IconsComponent } from '../../icons/icons.component';
-import {ProductActionComponent} from '../../product/product-action/product-action.component';
-
-import {ProductDeleteComponent} from '../../product/product-delete/product-delete.component';
-import {ProductUpdateComponent} from '../../product/product-update/product-update.component';
-import {ProductCreateComponent} from '../../product/product-create/product-create.component';
+import { ProductActionComponent} from '../../product/product-action/product-action.component';
+import { ProductDeleteComponent} from '../../product/product-delete/product-delete.component';
+import { ProductUpdateComponent} from '../../product/product-update/product-update.component';
+import { ProductCreateComponent} from '../../product/product-create/product-create.component';
+import { CategoryActionComponent} from '../../category/category-action/category-action.component';
+import { SupplierActionComponent} from '../../supplier/supplier-action/supplier-action.component';
+import { UserActionComponent} from '../../user/user-action/user-action.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'home',             component: ProductActionComponent},
@@ -14,9 +15,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'product-delete',   component: ProductDeleteComponent},
     { path: 'product-update',   component: ProductUpdateComponent},
     { path: 'order',    component: null},
-    { path: 'category', component: null},
-    { path: 'supplier', component: null},
-    { path: 'user',     component: null},
+    { path: 'category', component: CategoryActionComponent},
+    { path: 'supplier', component: SupplierActionComponent},
+    { path: 'user',     component: UserActionComponent},
     { path: 'profile',  component: UserProfileComponent },
     { path: 'icons',    component: IconsComponent }
 ];

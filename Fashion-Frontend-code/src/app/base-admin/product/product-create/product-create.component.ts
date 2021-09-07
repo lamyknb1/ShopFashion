@@ -24,7 +24,7 @@ export class ProductCreateComponent implements OnInit {
   supplier: any;
   previewUrl: any[];
   useFile: any[];
-  pictures: any[];
+  picture: any[];
   price: any;
   name: any;
   quantity: any;
@@ -49,11 +49,71 @@ export class ProductCreateComponent implements OnInit {
       description: ['', [Validators.required]],
       quantity: ['', [Validators.required, Validators.min(0)]],
     });
+    this.supplierService.getListSupplier().subscribe(next => this.supplierList = next);
+    this.categoryService.getListCategory().subscribe(next => this.categoryList = next);
+    this.useFile = [];
+    this.previewUrl = [];
+    this.picture = [];
+    this.category = [];
+    this.supplier = [];
   }
   onSubmit() {
-    console.log('mai k fix dc');
+    if (this.productForm.valid) {
+      const {value} = this.productForm;
+      this.product = value;
+      for (const preview of this.previewUrl) {
+        this.pictureService.postPicture(preview).subscribe(
+          next => {
+            this.picture.push({
+              pictureId: next
+            });
+          }
+        );
+      }
+    } else {
+      console.log('error');
+    }
+    setTimeout(() => {
+      this.createProduct();
+    }, 100);
   }
-  onClick() {
-    console.log('mtp');
+  createProduct() {
+    this.product.picture = this.picture;
+    this.product.category = this.category;
+    this.product.supplier = this.supplier;
+    this.productService.postProduct(this.product).subscribe(next => {
+      this.ngOnInit();
+      alert('Created a new product!');
+      this.router.navigate(['admin', 'home']);
+    });
+  }
+  onSelectFile(event) {
+    this.useFile = [];
+    this.useFile = event.srcElement.files;
+    console.log(this.useFile);
+    this.preview();
+  }
+  preview() {
+    // Show preview
+    for (let i = 0; i < this.useFile.length; i++) {
+      const mimeType = this.useFile[i].type;
+      if (mimeType.match(/image\/*/) == null) {
+        return;
+      }
+      const reader = new FileReader();
+      reader.readAsDataURL(this.useFile[i]);
+      reader.onload = event => {
+        if (typeof reader.result === 'string') {
+          this.previewUrl[i] = reader.result;
+        }
+      };
+    }
+    console.log(this.previewUrl);
+  }
+  addCategory(id) {
+    this.categoryService.getCategoryById(id).subscribe(next => this.category = next);
+  }
+  addSupplier(id) {
+    this.supplierService.getSupplierById(id).subscribe(next => this.supplier = next);
   }
 }

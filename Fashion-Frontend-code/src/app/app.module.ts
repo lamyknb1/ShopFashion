@@ -13,29 +13,36 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { UserLayoutComponent } from './base-user/layouts/user-layout/user-layout.component';
 import { httpInterceptorProviders } from './auth/helpers/auth-interceptor';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { UserActionComponent } from './base-admin/user/user-action/user-action.component';
+import { UserComponentsModule } from './base-user/components/user-components.module';
+
+
 
 @NgModule({
-    imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        ComponentsModule,
-        RouterModule,
-        AppRoutingModule,
-        NgbModule,
-        ToastrModule.forRoot(),
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-    ],
+  imports: [
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    ComponentsModule,
+    RouterModule,
+    AppRoutingModule,
+    NgbModule,
+    ToastrModule.forRoot(),
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ComponentsModule,
+    UserComponentsModule,
+  ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     UserLayoutComponent,
     LoginComponent,
     RegisterComponent,
+    UserActionComponent,
   ],
   providers: [httpInterceptorProviders,
     ],

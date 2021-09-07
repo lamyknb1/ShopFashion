@@ -8,6 +8,6 @@ export class ProductDetail {
   quantity?: number;
   size?: Size;
   color?: Colors;
-  product?: Product;
+  product?: Product[];
   order?: Order;
 }

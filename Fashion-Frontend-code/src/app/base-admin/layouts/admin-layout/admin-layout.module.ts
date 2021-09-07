@@ -16,6 +16,8 @@ import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dia
 import {MatInputModule} from '@angular/material/input';
 import {MatOptionModule} from '@angular/material/core';
 import {ProductCreateComponent} from '../../product/product-create/product-create.component';
+import {CategoryActionComponent} from '../../category/category-action/category-action.component';
+import {SupplierActionComponent} from '../../supplier/supplier-action/supplier-action.component';
 
 
 
@@ -39,7 +41,9 @@ import {ProductCreateComponent} from '../../product/product-create/product-creat
     ProductActionComponent,
     ProductCreateComponent,
     ProductDeleteComponent,
-    ProductUpdateComponent
+    ProductUpdateComponent,
+    CategoryActionComponent,
+    SupplierActionComponent
   ],
   providers: [
   ]

@@ -22,7 +22,7 @@ export class ProductActionComponent implements OnInit {
   // page
   private page = 1;
   private totalPage: number;
-  private productPage: Product[];
+  private productPage: Product[] = [];
   private listProductNotPage: Product[];
   private notification: string;
 
@@ -125,7 +125,8 @@ export class ProductActionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '40%';
+    dialogConfig.width = '30%';
+    dialogConfig.height = '90%';
     this.dialog.open(ProductCreateComponent, dialogConfig);
   }
   editProduct() {

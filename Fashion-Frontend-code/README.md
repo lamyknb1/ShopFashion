@@ -55,7 +55,7 @@ Now Ui Dashboard
 │   │   ├── app.module.ts
 │   │   ├── app.routing.ts
 │   │   ├── components
-│   │   │   ├── components.module.ts
+│   │   │   ├── user-components.module.ts
 │   │   │   ├── footer
 │   │   │   │   ├── footer.component.css
 │   │   │   │   ├── footer.component.html

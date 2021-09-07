@@ -28,7 +28,7 @@ export class ProductService {
       price: product.price,
       description: product.description,
       quantity: product.quantity,
-      pictures: product.pictures,
+      pictures: product.picture,
       category: product.category,
       supplier: product.supplier
     });
@@ -40,7 +40,7 @@ export class ProductService {
       price: product.price,
       description: product.description,
       quantity: product.quantity,
-      pictures: product.pictures,
+      pictures: product.picture,
       category: product.category,
       supplier: product.supplier
     });

@@ -5,7 +5,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgModule} from '@angular/core';
 import { HeaderUserComponent } from './header-user/header-user.component';
 import { FooterUserComponent } from './footer-user/footer-user.component';
-import { HomeComponent } from './home/home.component';
+import { SidebarUserComponent } from './sidebar-user/sidebar-user.component';
+
 
 
 @NgModule({
@@ -17,13 +18,15 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     HeaderUserComponent,
     FooterUserComponent,
-    HomeComponent],
+    SidebarUserComponent,
+
+  ],
   exports: [
     HeaderUserComponent,
     FooterUserComponent,
-    HomeComponent
+    SidebarUserComponent
   ]
 })
 
-export class ComponentsModule {
+export class UserComponentsModule {
 }
