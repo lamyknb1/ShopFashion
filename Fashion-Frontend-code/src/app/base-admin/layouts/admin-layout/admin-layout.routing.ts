@@ -8,16 +8,17 @@ import { ProductCreateComponent} from '../../product/product-create/product-crea
 import { CategoryActionComponent} from '../../category/category-action/category-action.component';
 import { SupplierActionComponent} from '../../supplier/supplier-action/supplier-action.component';
 import { UserActionComponent} from '../../user/user-action/user-action.component';
+import {OrderActionComponent} from '../../order/order-action/order-action.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'home',             component: ProductActionComponent},
     { path: 'product-create',   component: ProductCreateComponent},
     { path: 'product-delete',   component: ProductDeleteComponent},
     { path: 'product-update',   component: ProductUpdateComponent},
-    { path: 'order',    component: null},
-    { path: 'category', component: CategoryActionComponent},
-    { path: 'supplier', component: SupplierActionComponent},
-    { path: 'user',     component: UserActionComponent},
-    { path: 'profile',  component: UserProfileComponent },
-    { path: 'icons',    component: IconsComponent }
+    { path: 'order',            component: OrderActionComponent},
+    { path: 'category',         component: CategoryActionComponent},
+    { path: 'supplier',         component: SupplierActionComponent},
+    { path: 'user',             component: UserActionComponent},
+    { path: 'profile',          component: UserProfileComponent },
+    { path: 'icons',            component: IconsComponent }
 ];

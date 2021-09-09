@@ -1,10 +1,15 @@
-import {Status} from 'tslint/lib/runner';
+import {User} from './user';
+import {ProductDetail} from './productDetail';
+import {Payment} from './payment';
 
 export class Order {
   orderId?: number;
-  dateTime?: Date;
-  total?: number;
-  deliveryAddress?: string;
+  user?: User;
+  productDetails?: ProductDetail[];
   phoneOrder?: string;
-  status?: StatusEnum;
+  payment?: Payment;
+  deliveryAddress?: string;
+  total?: number;
+  dateTime?: Date;
+  status?: string;
 }

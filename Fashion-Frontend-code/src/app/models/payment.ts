@@ -1,6 +1,6 @@
 import {Order} from './order';
 
-export class Payment {
+export interface Payment {
   paymentId?: number;
   paymentName?: string;
   order?: Order;

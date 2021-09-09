@@ -3,9 +3,14 @@
   <div class="container">
 
     <!-- Brand -->
-    <a class="navbar-brand waves-effect" >
-      <strong class="blue-text">logo</strong>
+    <a class="simple-text logo-mini">
+      <div class="logo-img " >
+        <img  src="./assets/img/angular2-logo-white.png" style="max-width: 25%;"/>
+      </div>
     </a>
+<!--    <a class="simple-text logo-normal">-->
+<!--      Angular Pro-->
+<!--    </a>-->
 
     <!-- Collapse -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -55,7 +60,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link waves-effect" >
+          <a class="nav-link waves-effect" [routerLink]="'/login'">
+            <i class="fas fa-sign-in-alt"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" (click)="logout()">
             <i class="fas fa-sign-out-alt"></i>
           </a>
         </li>

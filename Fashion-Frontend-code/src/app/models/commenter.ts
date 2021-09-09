@@ -1,6 +1,6 @@
 import {Product} from './product';
 
-export class Commenter {
+export interface Commenter {
   commenterId?: number;
   content?: string;
   dateTime?: string;

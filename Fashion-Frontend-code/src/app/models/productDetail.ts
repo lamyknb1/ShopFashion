@@ -1,13 +1,15 @@
-import { Colors } from './colors';
+
 import { Size } from './size';
 import {Product} from './product';
-import {Order} from './order';
+import {Colors} from './colors';
+import {Payment} from './payment';
 
-export class ProductDetail {
-  detailId?: number;
-  quantity?: number;
+export interface ProductDetail {
+  id?: number;
   size?: Size;
   color?: Colors;
-  product?: Product[];
-  order?: Order;
+  payment?: Payment;
+  product?: Product;
+  quantity?: number;
+  order?: any;
 }

@@ -19,6 +19,7 @@ import { ProductCreateComponent} from '../../product/product-create/product-crea
 import { CategoryActionComponent} from '../../category/category-action/category-action.component';
 import { SupplierActionComponent} from '../../supplier/supplier-action/supplier-action.component';
 import { UserActionComponent} from '../../user/user-action/user-action.component';
+import {OrderActionComponent} from '../../order/order-action/order-action.component';
 
 
 
@@ -45,7 +46,8 @@ import { UserActionComponent} from '../../user/user-action/user-action.component
     ProductUpdateComponent,
     CategoryActionComponent,
     SupplierActionComponent,
-    UserActionComponent
+    UserActionComponent,
+    OrderActionComponent
   ],
   providers: [
   ]
