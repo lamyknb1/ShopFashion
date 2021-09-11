@@ -29,15 +29,15 @@ public class Product {
     @Column(name = "QUANTITY")
     private Long quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE}, targetEntity = Category.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE}, targetEntity = Supplier.class)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "SUPPLIER_ID")
     private Supplier supplier;
 
-    @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL},targetEntity = Commenter.class)
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL})
     @JsonIgnore
     private List<Commenter> commenters;
 

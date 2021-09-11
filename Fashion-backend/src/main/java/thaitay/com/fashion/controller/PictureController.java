@@ -1,19 +1,23 @@
 package thaitay.com.fashion.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import thaitay.com.fashion.dto.PictureDTO;
 import thaitay.com.fashion.entity.Picture;
+import thaitay.com.fashion.repository.PictureRepository;
 import thaitay.com.fashion.service.PictureService;
+import thaitay.com.fashion.service.impl.PictureStoreService;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +29,12 @@ public class PictureController {
     @Autowired
     private PictureService pictureService;
 
+    @Autowired
+    private PictureStoreService pictureStoreService;
+
+    @Autowired
+    private PictureRepository pictureRepository;
+
     @GetMapping("/picture")
     public ResponseEntity<List<Picture>> findAllPicture() {
         List<Picture> pictures = pictureService.findAllPicture();
@@ -35,24 +45,40 @@ public class PictureController {
     }
 
     @Transactional
-    @PostMapping("/picture")
-    public ResponseEntity<Picture> createPicture(@RequestBody Picture picture, UriComponentsBuilder ucBuilder) {
+    @PostMapping(value = "/picture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public PictureDTO uploadFile(@RequestParam("file") MultipartFile file) {
+
+        String name = StringUtils.cleanPath(file.getOriginalFilename());
+        name = pictureStoreService.storeFile(file);
+        Picture picture = new Picture();
+        picture.setPictureName(name);
+
+        // http://localhost:8081/download/abc.jpg
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/api/auth/picture/downloadFromDB/")
+                .path(name)
+                .toUriString();
+
+        String contentType = file.getContentType();
+        picture.setSrc(url);
         pictureService.savePicture(picture);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/picture/{id}").buildAndExpand(picture.getPictureId()).toUri());
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+        PictureDTO dto = new PictureDTO(name, contentType, url);
+        return dto;
     }
 
-    @Transactional
-    @PostMapping(value = "/picture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> addNewBookPicture(@RequestParam("file") MultipartFile file) throws IOException {
-        System.out.println("Creating Book picture ");
-        File convertFile = new File("E:\\Work\\SpringBoot" + file.getOriginalFilename());
-        convertFile.createNewFile();
-        FileOutputStream fout = new FileOutputStream(convertFile);
-        fout.write(file.getBytes());
-        fout.close();
-        return new ResponseEntity<String>("file is upload successfully", HttpStatus.CREATED);
+    @GetMapping("/picture/downloadFromDB/{fileName}")
+    ResponseEntity<Resource> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
+
+        Picture doc = pictureRepository.findByPictureName(fileName);
+
+        Resource resource = pictureStoreService.downloadFile(fileName);
+
+        String mimeType = request.getServletContext().getMimeType(doc.getPictureName());
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(mimeType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName="+resource.getFilename()).body(resource);
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + doc.getPictureName()).body(doc.getSrc());
     }
 
     @GetMapping("/picture/{id}")

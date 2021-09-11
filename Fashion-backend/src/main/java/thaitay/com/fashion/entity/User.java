@@ -24,6 +24,7 @@ import java.util.Set;
         })
 })
 @Proxy(lazy = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "S_USERS")
@@ -47,6 +48,7 @@ public class User {
     @Column(name = "AVATAR")
     private String avatar;
     @NotBlank
+    @JsonIgnore
     @Column(name = "PASSWORD")
     private String password;
 
@@ -55,8 +57,9 @@ public class User {
     @JsonIgnore
     private List<Commenter> commenters;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL},targetEntity = Order.class)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+//    @LazyCollection(LazyCollectionOption.FALSE)
+//    @JsonManagedReference
     @JsonIgnore
     private List<Order> orders;
 

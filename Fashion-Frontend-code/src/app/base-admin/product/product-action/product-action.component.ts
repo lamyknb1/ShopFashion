@@ -10,6 +10,7 @@ import {SupplierService} from '../../../services/supplier.service';
 import {PictureService} from '../../../services/picture.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ProductCreateComponent} from '../product-create/product-create.component';
+import {ProductUpdateComponent} from '../product-update/product-update.component';
 
 @Component({
   selector: 'app-product-action',
@@ -129,7 +130,15 @@ export class ProductActionComponent implements OnInit {
     dialogConfig.height = '90%';
     this.dialog.open(ProductCreateComponent, dialogConfig);
   }
-  editProduct() {
+
+  editProduct(productId: number) {
     console.log('edit product');
+    this.router.navigate(['admin', 'product-update', productId]);
+    // const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = true;
+    // dialogConfig.autoFocus = true;
+    // dialogConfig.width = '30%';
+    // dialogConfig.height = '90%';
+    // this.dialog.open(ProductUpdateComponent, dialogConfig);
   }
 }

@@ -24,6 +24,7 @@ public class UsersController {
 
     @Transactional
     @GetMapping("/user")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> List(){
         List<User> users=(List<User>) usersService.findAll();
         if (users.isEmpty()){

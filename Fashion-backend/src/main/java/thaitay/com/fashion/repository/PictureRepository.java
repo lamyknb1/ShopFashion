@@ -6,4 +6,6 @@ import thaitay.com.fashion.entity.Picture;
 
 @Repository
 public interface PictureRepository extends JpaRepository<Picture, Long> {
+
+    Picture findByPictureName(String pictureName);
 }

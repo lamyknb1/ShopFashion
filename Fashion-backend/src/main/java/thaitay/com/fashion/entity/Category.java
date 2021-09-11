@@ -20,7 +20,7 @@ public class Category {
     @Column(name = "CATEGORY_NAME")
     private String categoryName;
 
-    @OneToMany(mappedBy = "category", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, targetEntity = Product.class)
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Product> products;
 

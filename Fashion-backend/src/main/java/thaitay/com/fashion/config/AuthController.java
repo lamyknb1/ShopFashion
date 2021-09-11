@@ -8,7 +8,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import thaitay.com.fashion.config.dto.*;
 import thaitay.com.fashion.config.security.JsonWebToken.common.JwtUtils;
 import thaitay.com.fashion.config.security.services.UserDetailsImpl;
@@ -21,6 +23,11 @@ import thaitay.com.fashion.repository.UserRepository;
 import thaitay.com.fashion.service.UserService;
 
 import javax.validation.Valid;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -123,7 +130,9 @@ public class AuthController {
     }
 
     @PutMapping("/update-profile/{id}")
-    public ResponseEntity<?> updateUser(@Valid @RequestBody UserForm userForm, @PathVariable Long id) {
+    public ResponseEntity<?> updateUser(@Valid @RequestBody UserForm userForm,
+                                        @PathVariable Long id,
+                                        @RequestParam("file") MultipartFile file) {
         Optional<User> user = userService.findById(id);
 
         if(user == null) {
@@ -131,9 +140,21 @@ public class AuthController {
         }
 
         try {
+            String avatar = StringUtils.cleanPath(file.getOriginalFilename());
             user.get().setName(userForm.getName());
+            user.get().setAvatar(avatar);
 
             userService.save(user.get());
+
+            String upLoadAvatar = "/avatar/" + user.get().getUserId();
+
+            Path upLoadPath = Paths.get(upLoadAvatar);
+            if (!Files.exists(upLoadPath)) {
+                Files.createDirectories(upLoadPath);
+            }
+            InputStream inputStream = file.getInputStream();
+            Path path = upLoadPath.resolve(avatar);
+            Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
 
             return new ResponseEntity<>(new ResponseMessage("Update successful"), HttpStatus.OK);
         } catch (Exception e ) {

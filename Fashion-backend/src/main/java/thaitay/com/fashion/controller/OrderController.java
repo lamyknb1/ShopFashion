@@ -32,7 +32,6 @@ public class OrderController {
 
     @Transactional
     @GetMapping("/order")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> listOder(){
         List<Order> orders = (List<Order>) orderService.findAll();
         if (orders.isEmpty()){
@@ -144,6 +143,7 @@ public class OrderController {
     }
     @Transactional
     @PutMapping("/order/change-status/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> changeOrderStatus(@RequestBody String status, @PathVariable Long id) {
         Status currentStatus;
         switch (status) {

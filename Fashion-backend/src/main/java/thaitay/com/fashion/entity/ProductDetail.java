@@ -1,10 +1,6 @@
 package thaitay.com.fashion.entity;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
 
 @Entity
 @Table(name = "PRODUCT_DETAIL")

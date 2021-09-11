@@ -1,5 +1,6 @@
 package thaitay.com.fashion.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.LazyCollection;
@@ -34,7 +35,7 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE})
     @JoinColumn(name = "USER_ID")
-    @JsonIgnore
+//    @JsonBackReference
     private User user;
 
     @JoinColumn(name = "PAYMENT_ID")

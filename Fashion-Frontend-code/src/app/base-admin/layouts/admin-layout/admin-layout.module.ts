@@ -8,18 +8,18 @@ import { IconsComponent } from '../../icons/icons.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldControl, MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule} from '@angular/material/form-field';
 import { ProductActionComponent} from '../../product/product-action/product-action.component';
 import { ProductDeleteComponent} from '../../product/product-delete/product-delete.component';
 import { ProductUpdateComponent} from '../../product/product-update/product-update.component';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule} from '@angular/material/input';
 import { MatOptionModule} from '@angular/material/core';
 import { ProductCreateComponent} from '../../product/product-create/product-create.component';
 import { CategoryActionComponent} from '../../category/category-action/category-action.component';
 import { SupplierActionComponent} from '../../supplier/supplier-action/supplier-action.component';
 import { UserActionComponent} from '../../user/user-action/user-action.component';
-import {OrderActionComponent} from '../../order/order-action/order-action.component';
+import { OrderActionComponent} from '../../order/order-action/order-action.component';
 
 
 
@@ -47,7 +47,7 @@ import {OrderActionComponent} from '../../order/order-action/order-action.compon
     CategoryActionComponent,
     SupplierActionComponent,
     UserActionComponent,
-    OrderActionComponent
+    OrderActionComponent,
   ],
   providers: [
   ]

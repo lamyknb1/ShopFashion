@@ -14,7 +14,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'home',             component: ProductActionComponent},
     { path: 'product-create',   component: ProductCreateComponent},
     { path: 'product-delete',   component: ProductDeleteComponent},
-    { path: 'product-update',   component: ProductUpdateComponent},
+    { path: 'product-update/:productId',   component: ProductUpdateComponent},
     { path: 'order',            component: OrderActionComponent},
     { path: 'category',         component: CategoryActionComponent},
     { path: 'supplier',         component: SupplierActionComponent},

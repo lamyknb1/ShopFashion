@@ -7,11 +7,11 @@ import { Picture } from '../models/picture';
   providedIn: 'root'
 })
 export class PictureService {
-  private readonly API_URL = 'http://localhost:8000/api/auth/picture';
+  private readonly API_URL = 'http://localhost:8000/api/auth/picture2';
 
   constructor(private http: HttpClient) { }
 
-  getAllPicture(): Observable<Picture[]> {
+  getListPicture(): Observable<Picture[]> {
     return this.http.get<Picture[]>(`${this.API_URL}`);
   }
   getPictureById(id: number): Observable<Picture> {

@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UserComponentsModule } from './base-user/components/user-components.module';
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -30,7 +31,7 @@ import { UserComponentsModule } from './base-user/components/user-components.mod
     MatFormFieldModule,
     MatInputModule,
     ComponentsModule,
-    UserComponentsModule,
+    UserComponentsModule
   ],
   declarations: [
     AppComponent,

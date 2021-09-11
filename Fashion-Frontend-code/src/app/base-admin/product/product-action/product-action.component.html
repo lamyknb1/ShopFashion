@@ -91,7 +91,7 @@
                   <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Show">
                     <i class="now-ui-icons ui-1_zoom-bold"></i>
                   </button>
-                  <button (click)="editProduct()" type="button" rel="tooltip" data-toggle="modal" data-target="#edit" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                  <button (click)="editProduct(product.productId)" type="button" rel="tooltip" data-toggle="modal" data-target="#edit" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
                     <i class="now-ui-icons ui-2_settings-90"></i>
                   </button>
                   <button (click)="deleteProduct(product.productId)" type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">

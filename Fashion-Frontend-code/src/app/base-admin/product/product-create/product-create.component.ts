@@ -7,7 +7,7 @@ import {Category} from '../../../models/category';
 import {CategoryService} from '../../../services/category.service';
 import {SupplierService} from '../../../services/supplier.service';
 import {PictureService} from '../../../services/picture.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../services/product.service';
 import {TokenStorageService} from '../../../auth/service-auth/token-storage.service';
 
