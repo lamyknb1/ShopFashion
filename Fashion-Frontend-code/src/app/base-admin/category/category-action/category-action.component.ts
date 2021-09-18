@@ -20,6 +20,8 @@ export class CategoryActionComponent implements OnInit {
   private editCategory: Category;
   private deleteCategory: Category;
   private sizeClass: Size[];
+  private editSize: Size;
+  private deleteSize: Size;
 
   constructor(private toasterService: ToastrService,
               private categoryService: CategoryService,
@@ -110,5 +112,63 @@ export class CategoryActionComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  onAddSize(addForm1: NgForm): void {
+    document.getElementById('add-size-form').click();
+    this.sizeService.postSize(addForm1.value).subscribe(
+      (response: Size) => {
+        console.log(response);
+        alert('Thêm Thành Công');
+        this.listSize();
+        addForm1.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+        addForm1.reset();
+      }
+    );
+  }
+  onUpdateSize(size: Size): void {
+    document.getElementById('edit-size-form').click();
+    this.sizeService.putSize(size).subscribe(
+      (response: Size) => {
+        console.log(response);
+        this.listCategory();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+  onDeleteSize(sizeId: number): void {
+    this.sizeService.deleteSize(sizeId).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.listSize();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+  public onOpenModal1(size: Size, mode: string): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addEmployeeModal1');
+    }
+    if (mode === 'edit') {
+      this.editSize = size;
+      button.setAttribute('data-target', '#updateEmployeeModal1');
+    }
+    if (mode === 'delete') {
+      this.deleteSize = size;
+      button.setAttribute('data-target', '#deleteEmployeeModal1');
+    }
+    container.appendChild(button);
+    button.click();
   }
 }
