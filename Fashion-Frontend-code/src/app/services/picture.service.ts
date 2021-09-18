@@ -7,7 +7,7 @@ import { Picture } from '../models/picture';
   providedIn: 'root'
 })
 export class PictureService {
-  private readonly API_URL = 'http://localhost:8000/api/auth/picture2';
+  private readonly API_URL = 'http://localhost:8000/api/auth/picture';
 
   constructor(private http: HttpClient) { }
 
@@ -20,9 +20,9 @@ export class PictureService {
   // createPicture(picture: Picture): Observable<Picture> {
   //   return this.http.post<Picture>(this.API_URL, picture);
   // }
-  postPicture(preview): Observable<any> {
+  postPicture(preview): Observable<Picture> {
     console.log(preview);
-    return this.http.post(this.API_URL, {
+    return this.http.post<Picture>(this.API_URL, {
       src: preview
     });
   }

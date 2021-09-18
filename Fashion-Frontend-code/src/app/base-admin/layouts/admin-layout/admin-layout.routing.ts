@@ -9,6 +9,7 @@ import { CategoryActionComponent} from '../../category/category-action/category-
 import { SupplierActionComponent} from '../../supplier/supplier-action/supplier-action.component';
 import { UserActionComponent} from '../../user/user-action/user-action.component';
 import {OrderActionComponent} from '../../order/order-action/order-action.component';
+import {ProductDetailActionComponent} from '../../product-detail/product-detail-action/product-detail-action.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'home',             component: ProductActionComponent},
@@ -16,6 +17,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'product-delete',   component: ProductDeleteComponent},
     { path: 'product-update/:productId',   component: ProductUpdateComponent},
     { path: 'order',            component: OrderActionComponent},
+    { path: 'product-detail/:productId',            component: ProductDetailActionComponent},
     { path: 'category',         component: CategoryActionComponent},
     { path: 'supplier',         component: SupplierActionComponent},
     { path: 'user',             component: UserActionComponent},

@@ -14,12 +14,15 @@ import org.springframework.web.multipart.MultipartFile;
 import thaitay.com.fashion.config.dto.*;
 import thaitay.com.fashion.config.security.JsonWebToken.common.JwtUtils;
 import thaitay.com.fashion.config.security.services.UserDetailsImpl;
+import thaitay.com.fashion.entity.ForgotPassword;
 import thaitay.com.fashion.entity.Role;
 import thaitay.com.fashion.entity.RoleName;
 import thaitay.com.fashion.entity.User;
 import thaitay.com.fashion.message.ResponseMessage;
+import thaitay.com.fashion.repository.ForgetPasswordRepository;
 import thaitay.com.fashion.repository.RoleRepository;
 import thaitay.com.fashion.repository.UserRepository;
+import thaitay.com.fashion.service.MailService;
 import thaitay.com.fashion.service.UserService;
 
 import javax.validation.Valid;
@@ -28,10 +31,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 //end
@@ -57,6 +58,12 @@ public class AuthController {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private ForgetPasswordRepository forgetPasswordRepository;
+
+    @Autowired
+    private MailService mailService;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -179,6 +186,53 @@ public class AuthController {
             userService.save(user.get());
 
             return new ResponseEntity<>(new ResponseMessage("Change password successful"), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException("Fail!");
+        }
+    }
+
+    @PostMapping("/forgot-password")
+    public String forgotPassword(@RequestParam String email) {
+
+        User user = userService.findByEmail(email);
+        ForgotPassword token;
+        if (user == null) {
+            return "Invalid email id.";
+        }
+
+        if (user.getForgotPasswords() != null) {
+            token = user.getForgotPasswords();
+        } else {
+            token = new ForgotPassword();
+        }
+        token.setUser(user);
+        token.setToken(UUID.randomUUID().toString());
+        token.setTokenCreationDate(LocalDateTime.now());
+        forgetPasswordRepository.save(token);
+        user.setForgotPasswords(token);
+        userRepository.save(user);
+        String response = token.getToken();
+
+        if (!response.startsWith("Invalid")) {
+            response = "/api/auth/reset-password?token=" + response;
+
+        }
+        mailService.sendmail(email, response);
+        return response;
+    }
+
+    @PutMapping("/reset-password")
+    public String forgotPasswordUpdate(@RequestParam String token, @Valid @RequestBody PasswordForm passForm) {
+        ForgotPassword forgotPassword = forgetPasswordRepository.findByToken(token);
+        User user = forgotPassword.getUser();
+        if (user == null) {
+            return "Not found user";
+        }
+        try {
+            user.setPassword(encoder.encode(passForm.getNewPassword()));
+            userService.save(user);
+            return "success";
+
         } catch (Exception e) {
             throw new RuntimeException("Fail!");
         }

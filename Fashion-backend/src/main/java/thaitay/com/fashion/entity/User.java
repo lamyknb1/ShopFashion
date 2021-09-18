@@ -72,6 +72,9 @@ public class User {
     @JsonIgnore
     private Set<Role> roles = new HashSet<>();
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private ForgotPassword forgotPasswords;
+
     public User() {
     }
 
@@ -176,5 +179,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public ForgotPassword getForgotPasswords() {
+        return forgotPasswords;
+    }
+
+    public void setForgotPasswords(ForgotPassword forgotPasswords) {
+        this.forgotPasswords = forgotPasswords;
     }
 }

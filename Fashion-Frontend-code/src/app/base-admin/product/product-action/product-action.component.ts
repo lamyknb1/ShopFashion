@@ -10,7 +10,6 @@ import {SupplierService} from '../../../services/supplier.service';
 import {PictureService} from '../../../services/picture.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ProductCreateComponent} from '../product-create/product-create.component';
-import {ProductUpdateComponent} from '../product-update/product-update.component';
 
 @Component({
   selector: 'app-product-action',
@@ -23,7 +22,7 @@ export class ProductActionComponent implements OnInit {
   // page
   private page = 1;
   private totalPage: number;
-  private productPage: Product[] = [];
+  public productPage: Product[] = [];
   private listProductNotPage: Product[];
   private notification: string;
 
@@ -126,14 +125,24 @@ export class ProductActionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '30%';
-    dialogConfig.height = '90%';
+    dialogConfig.width = '40%';
+    dialogConfig.height = '80%';
     this.dialog.open(ProductCreateComponent, dialogConfig);
   }
 
   editProduct(productId: number) {
     console.log('edit product');
     this.router.navigate(['admin', 'product-update', productId]);
+    // const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = true;
+    // dialogConfig.autoFocus = true;
+    // dialogConfig.width = '30%';
+    // dialogConfig.height = '90%';
+    // this.dialog.open(ProductUpdateComponent, dialogConfig);
+  }
+  detailProduct(productId: number) {
+    console.log('edit product');
+    this.router.navigate(['admin', 'product-detail', productId]);
     // const dialogConfig = new MatDialogConfig();
     // dialogConfig.disableClose = true;
     // dialogConfig.autoFocus = true;

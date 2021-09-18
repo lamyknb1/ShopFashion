@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../models/product';
 import {Supplier} from '../../../models/supplier';
 import {Category} from '../../../models/category';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {CategoryService} from '../../../services/category.service';
 import {SupplierService} from '../../../services/supplier.service';
 import {PictureService} from '../../../services/picture.service';
@@ -62,7 +61,7 @@ export class ProductUpdateComponent implements OnInit {
         this.supplier = next.supplier;
         this.category = next.category;
         for (const picture of next.pictures) {
-          this.previewUrl.push(picture.src);
+          this.previewUrl.push(picture.url);
         }
       }, error => {
         console.log(error);
@@ -78,7 +77,7 @@ export class ProductUpdateComponent implements OnInit {
         this.pictureService.postPicture(preview).subscribe(
           next => {
             this.picture.push({
-              id: next
+              pictureId: next
             });
           }
         );

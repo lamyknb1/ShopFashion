@@ -5,7 +5,7 @@ import {Colors} from './colors';
 import {Payment} from './payment';
 
 export interface ProductDetail {
-  id?: number;
+  detailId?: number;
   size?: Size;
   color?: Colors;
   payment?: Payment;

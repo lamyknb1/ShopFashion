@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import thaitay.com.fashion.entity.ProductDetail;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductDetailRepository extends JpaRepository<ProductDetail, Long> {
@@ -15,4 +16,5 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail, Lo
     List<ProductDetail> findByOrderOrderId(Long orderId);
     ProductDetail findByProductAndOrder(Long productId, Long orderId);
     List<ProductDetail> findByOrder(Long orderId);
+    Optional<ProductDetail> findByProductProductId(Long productId);
 }

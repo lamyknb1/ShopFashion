@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/auth")
 public class PictureController {
@@ -85,6 +85,18 @@ public class PictureController {
     public ResponseEntity<?> getAPicture(@PathVariable("id") Long id) {
         Optional<Picture> picture = pictureService.findByPictureId(id);
         if (!picture.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(picture, HttpStatus.OK);
+    }
+    @GetMapping("/picture1/{id}")
+    public ResponseEntity<?> getAllPictureByProductId(@PathVariable("id") Optional<Long> id) {
+        Iterable<Picture> picture;
+        if (id.isPresent()) {
+            picture = pictureRepository.findPictureByProductProductId(id.get());
+        }
+            else
+        {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(picture, HttpStatus.OK);

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import thaitay.com.fashion.entity.ProductDetail;
+import thaitay.com.fashion.repository.ProductDetailRepository;
 import thaitay.com.fashion.service.ProductDetailService;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class ProductDetailController {
     @Autowired
     private ProductDetailService productDetailService;
 
+    @Autowired
+    private ProductDetailRepository productDetailRepository;
+
     @GetMapping("/productDetail")
     public ResponseEntity<List<ProductDetail>> getAllProductDetail() {
         List<ProductDetail> productDetailList = productDetailService.findAllProductDetail();
@@ -25,6 +29,15 @@ public class ProductDetailController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(productDetailList, HttpStatus.OK);
+    }
+
+        @GetMapping("/productDetail1/{id}")
+    public ResponseEntity<?> getProductDetail(@PathVariable("id") Long id){
+        Optional<ProductDetail> thisProductDetail = productDetailRepository.findByProductProductId(id);
+        if(!thisProductDetail.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(thisProductDetail, HttpStatus.OK);
     }
 
 //    @PostMapping("/productDetail")
@@ -47,8 +60,7 @@ public class ProductDetailController {
     }
 
     @GetMapping("/productDetail/{id}")
-    public ResponseEntity<?> getAProductDetail(
-            @PathVariable("id") Long id){
+    public ResponseEntity<?> getAProductDetail(@PathVariable("id") Long id){
         Optional<ProductDetail> thisProductDetail = productDetailService.findDetailById(id);
         if(!thisProductDetail.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -68,7 +68,7 @@
               <!--              <th>Check</th>-->
               <th>Mã</th>
               <th>Tên</th>
-              <th>Ảnh</th>
+<!--              <th>Ảnh</th>-->
               <th>Giá</th>
               <th>Miêu Tả</th>
               <th>Số Lượng</th>
@@ -80,15 +80,17 @@
               <tr *ngFor="let product of productPage, let i=index">
                 <td>{{product.productId}}</td>
                 <td>{{product.name}}</td>
-                <td><img src="../../../../assets/images/vans/era/Era1.jpg"
-                         height="60px" width="60px">
+<!--                <td >-->
+<!--                  <img *ngIf="product.picture" [src]="product.picture.url"   height="60px" width="60px">-->
+<!--                  <img *ngIf="!product.picture" src="../../../../assets/images/vans/era/Era1.jpg" alt="Card image cap" height="60px" width="60px">-->
+<!--                </td>-->
                 <td>{{product.price | currency : 'vnđ'+' ':'symbol' : '1.0-0'}}</td>
                 <td>{{product.description}}</td>
                 <td>{{product.quantity}}</td>
                 <td>{{product.category.categoryName}}</td>
                 <td>{{product.supplier.supplierName}}</td>
                 <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Show">
+                  <button (click)="detailProduct(product.productId)" type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Show">
                     <i class="now-ui-icons ui-1_zoom-bold"></i>
                   </button>
                   <button (click)="editProduct(product.productId)" type="button" rel="tooltip" data-toggle="modal" data-target="#edit" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">

@@ -16,4 +16,5 @@ public interface UserService {
     Iterable<User> findAll();
     void delete(Long id);
     Iterable<User> findUsersByNameContaining(String userName);
+    User findByEmail(String email);
 }

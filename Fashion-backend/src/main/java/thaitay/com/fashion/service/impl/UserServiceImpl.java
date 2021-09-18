@@ -67,4 +67,9 @@ public class UserServiceImpl implements UserService {
     public Iterable<User> findUsersByNameContaining(String userName) {
         return usersRepository.findUsersByNameContaining(userName);
     }
+
+    @Override
+    public User findByEmail(String email) {
+        return usersRepository.findByEmail(email);
+    }
 }

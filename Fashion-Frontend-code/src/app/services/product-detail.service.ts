@@ -14,6 +14,9 @@ export class ProductDetailService {
   getProductDetail(): Observable<ProductDetail[]> {
     return this.http.get<ProductDetail[]>(`${this.API_URL}`);
   }
+  getProductDetailId(): Observable<ProductDetail[]> {
+    return this.http.get<ProductDetail[]>(`${this.API_URL}`);
+  }
   getProductDetailById(id: number): Observable<ProductDetail> {
     return this.http.get<ProductDetail>(`${this.API_URL}/${id}`);
   }

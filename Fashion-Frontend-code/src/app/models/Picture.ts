@@ -2,6 +2,8 @@ import {Product} from './product';
 
 export interface Picture {
   pictureId?: number;
-  src?: string;
+  fileName?: string;
+  contentType?: string;
+  url?: string;
   product?: Product[];
 }
