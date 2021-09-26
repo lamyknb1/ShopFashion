@@ -20,11 +20,12 @@ export class ProductActionComponent implements OnInit {
 
   private subscription: Subscription;
   // page
-  private page = 1;
+  private page = 0;
   private totalPage: number;
-  public productPage: Product[] = [];
+  private productPage: Product[];
   private listProductNotPage: Product[];
   private notification: string;
+  pageItem = [];
 
   constructor(private productService: ProductService,
               private token: TokenStorageService,
@@ -38,68 +39,58 @@ export class ProductActionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pageListProduct();
-    this.subscription = this.productService.getListProduct().subscribe(
-      (data: Product[]) => {
-        this.listProductNotPage = data;
-        // tslint:disable-next-line:triple-equals
-        if ((this.listProductNotPage.length % 6) != 0) {
-          this.totalPage = (Math.round(this.listProductNotPage.length / 6)) + 1;
-        }
-      }
-    );
+    this.pageListProduct(this.page);
+    // this.subscription = this.productService.getListProduct().subscribe(
+    //   (data) => {
+    //     this.listProductNotPage = data.product;
+    //     // tslint:disable-next-line:triple-equals
+    //     if ((this.listProductNotPage.length % 6) != 0) {
+    //       this.totalPage = (Math.round(this.listProductNotPage.length / 6)) + 1;
+    //     }
+    //   }
+    // );
+
   }
-  pageListProduct() {
-    this.subscription = this.productService.getPageProduct(this.page).subscribe(
+  pageListProduct( page) {
+    this.subscription = this.productService.getPageProduct(page).subscribe(
       data => {
-        this.productPage = data;
+        this.productPage = data.product;
+        this.totalPage = data.totalPage;
         console.log(data);
       },
       error => {
         console.log(error);
       }
     );
+    this.pageItem = Array(length = this.totalPage );
+  }
+  setPage(pages: number) {
+    this.page = pages;
+    this.pageListProduct(this.page);
   }
   firstPage() {
-    this.page = 1;
-    this.ngOnInit();
+    this.pageListProduct(0);
   }
   previousPage() {
-    this.page = this.page - 1;
     if (this.page <= 0) {
-      this.page = 1;
-      this.ngOnInit();
+      this.page = 0;
     } else {
-      this.productService.getPageProduct((this.page)).subscribe(data => {
-          this.productPage = data;
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
-    }
-  }
-  nextPage() {
-    this.page = this.page + 1;
-    if (this.page > Math.floor(this.listProductNotPage.length / 6) + 1) {
       this.page = this.page - 1;
     }
-    this.productService.getPageProduct(this.page).subscribe(data => {
-        this.productPage = data; console.log(data);
-      },
-      error => { console.log(error);
-      });
+    this.pageListProduct(this.page);
+  }
+  nextPage() {
+
+    if (this.page >= this.totalPage - 1) {
+      this.page = this.totalPage - 1;
+    } else {
+      this.page = this.page + 1;
+    }
+    this.pageListProduct(this.page);
   }
   lastPage() {
-    // @ts-ignore
-    this.page = Math.floor(this.listProductNotPage.length / 6 + 1);
-    this.productService.getPageProduct(this.page).subscribe(data => {
-        this.productPage = data;
-        console.log(data);
-      },
-      error => {
-        console.log(error);
-      });
+    this.page = this.totalPage - 1;
+    this.pageListProduct(this.page);
   }
   deleteProduct(productId) {
     if (this.token.getToken()) {

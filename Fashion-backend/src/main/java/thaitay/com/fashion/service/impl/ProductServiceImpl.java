@@ -14,7 +14,9 @@ import thaitay.com.fashion.entity.Product;
 import thaitay.com.fashion.repository.ProductRepository;
 import thaitay.com.fashion.service.ProductService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -73,9 +75,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllWithPagination(int pageNo, int pageSize) {
+    public Map<String, Object> getAllWithPagination(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        return productRepository.findAll(pageable).getContent();
+        List<Product> product = productRepository.findAll(pageable).getContent();
+        int totalpage = productRepository.findAll(pageable).getTotalPages();
+        Map<String, Object> response = new HashMap<>();
+        response.put("product",product);
+        response.put("totalPage",totalpage);
+        return response;
     }
 
 

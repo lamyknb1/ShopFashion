@@ -23,17 +23,6 @@ public class Role {
     @Column(name = "ROLE_NAME", length = 60)
     private RoleName roleName;
 
-//    @OneToMany(mappedBy="roles", targetEntity = User.class,
-//            cascade = {CascadeType.ALL},
-//            fetch = FetchType.LAZY)
-//    @JsonIgnore
-//    private List<User> users;
-
-//    @ManyToMany(mappedBy = "roles", cascade = CascadeType.MERGE)
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//    @JsonIgnore
-//    private Set<User> users = new HashSet<>();
-
     public Role() {
     }
 

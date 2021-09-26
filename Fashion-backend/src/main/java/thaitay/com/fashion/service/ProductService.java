@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import thaitay.com.fashion.entity.Product;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ProductService {
@@ -17,5 +18,5 @@ public interface ProductService {
     List<Product> findAllBySupplier_SupplierId(Long supplierId);
     Iterable<Product> findProductsByNameContaining(String name);
 
-    List<Product> getAllWithPagination(int pageNo, int pageSize);
+    Map<String, Object> getAllWithPagination(int pageNo, int pageSize);
 }

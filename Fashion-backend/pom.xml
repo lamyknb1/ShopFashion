@@ -78,7 +78,7 @@
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.3</version>
             <scope>system</scope>
-            <systemPath>${basedir}/target/ojdbc6-11.2.0.3.jar</systemPath>
+            <systemPath>${basedir}/src/ojdbc6-11.2.0.3.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

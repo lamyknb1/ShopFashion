@@ -35,7 +35,6 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.MERGE})
     @JoinColumn(name = "USER_ID")
-//    @JsonBackReference
     private User user;
 
     @JoinColumn(name = "PAYMENT_ID")

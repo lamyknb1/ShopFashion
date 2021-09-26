@@ -58,8 +58,6 @@ public class User {
     private List<Commenter> commenters;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-//    @LazyCollection(LazyCollectionOption.FALSE)
-//    @JsonManagedReference
     @JsonIgnore
     private List<Order> orders;
 
