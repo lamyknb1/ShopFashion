@@ -20,10 +20,9 @@ export class ProductActionComponent implements OnInit {
 
   private subscription: Subscription;
   // page
-  private page = 0;
+  private page = 1;
   private totalPage: number;
   private productPage: Product[];
-  private listProductNotPage: Product[];
   private notification: string;
   pageItem = [];
 
@@ -39,20 +38,10 @@ export class ProductActionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pageListProduct(this.page);
-    // this.subscription = this.productService.getListProduct().subscribe(
-    //   (data) => {
-    //     this.listProductNotPage = data.product;
-    //     // tslint:disable-next-line:triple-equals
-    //     if ((this.listProductNotPage.length % 6) != 0) {
-    //       this.totalPage = (Math.round(this.listProductNotPage.length / 6)) + 1;
-    //     }
-    //   }
-    // );
-
+    this.pageListProduct();
   }
-  pageListProduct( page) {
-    this.subscription = this.productService.getPageProduct(page).subscribe(
+  pageListProduct() {
+    this.subscription = this.productService.getPageProduct(this.page).subscribe(
       data => {
         this.productPage = data.product;
         this.totalPage = data.totalPage;
@@ -66,31 +55,31 @@ export class ProductActionComponent implements OnInit {
   }
   setPage(pages: number) {
     this.page = pages;
-    this.pageListProduct(this.page);
+    this.pageListProduct();
   }
   firstPage() {
-    this.pageListProduct(0);
+    this.page = 1;
+    this.pageListProduct();
   }
   previousPage() {
-    if (this.page <= 0) {
-      this.page = 0;
+    if (this.page <= 1) {
+      this.page = 1;
     } else {
       this.page = this.page - 1;
     }
-    this.pageListProduct(this.page);
+    this.pageListProduct();
   }
   nextPage() {
-
-    if (this.page >= this.totalPage - 1) {
+    if (this.page > this.totalPage) {
       this.page = this.totalPage - 1;
     } else {
       this.page = this.page + 1;
     }
-    this.pageListProduct(this.page);
+    this.pageListProduct();
   }
   lastPage() {
-    this.page = this.totalPage - 1;
-    this.pageListProduct(this.page);
+    this.page = this.totalPage;
+    this.pageListProduct();
   }
   deleteProduct(productId) {
     if (this.token.getToken()) {

@@ -45,7 +45,7 @@
                 <li class="page-item " *ngFor="let item of pageItem; let i=index;">
                   <button class="page-link" [ngClass]="{hidenItem:i<page-2||i>page+2,actives:i===page}"
                           (click)="setPage(i)"
-                  >{{i}}</button>
+                  >{{i+1}}</button>
                 </li>
                 <li class="page-item">
                   <a class="page-link" (click)="nextPage()">
@@ -126,13 +126,13 @@
                   <li class="page-item " *ngFor="let item of pageItem; let i=index;">
                     <a class="page-link" [ngClass]="{hidenItem:i<page-2||i>page+2,actives:i===page}"
                        (click)="setPage(i)"
-                    >{{i}}</a>
+                    >{{i+1}}</a>
                   </li>
-                  <li class="page-item " *ngFor="let item of pageItem; let i=index;">
+                  <!--<li class="page-item " *ngFor="let item of pageItem; let i=index;">
                     <button class="page-link" [ngClass]="{actives:i+1===page}"
                             (click)="setPage(i+1)"
                     >{{i+1}}</button>
-                  </li>
+                  </li>-->
                   <li class="page-item">
                     <a class="page-link" (click)="nextPage()">
                       <i class="fas fa-angle-right"></i>
