@@ -68,7 +68,7 @@
             <table class="table">
               <thead class=" text-primary">
               <!--              <th>Check</th>-->
-              <th>Mã</th>
+              <th>STT</th>
               <th>Tên</th>
 <!--              <th>Ảnh</th>-->
               <th>Giá</th>
@@ -80,7 +80,7 @@
               </thead>
               <tbody>
               <tr *ngFor="let product of productPage, let i=index">
-                <td>{{product.productId}}</td>
+                <td>{{i+1+((page-1) * totalPage)}}</td>
                 <td>{{product.name}}</td>
 <!--                <td >-->
 <!--                  <img *ngIf="product.picture" [src]="product.picture.url"   height="60px" width="60px">-->
@@ -123,11 +123,6 @@
                       <span class="sr-only">Previous</span>
                     </a>
                   </li>
-<!--                  <li class="page-item " *ngFor="let item of pageItem; let i=index;">-->
-<!--                    <a class="page-link" [ngClass]="{hidenItem:i<page-2||i>page+2,actives:i===page}"-->
-<!--                       (click)="setPage(i)"-->
-<!--                    >{{i+1}}</a>-->
-<!--                  </li>-->
                   <li class="page-item " *ngFor="let item of pageItem; let i=index;">
                     <button class="page-link" [ngClass]="{actives:i+1===page}"
                             (click)="setPage(i+1)"

@@ -57,7 +57,8 @@ export class CategoryActionComponent implements OnInit {
       }
     );
   }
-  onUpdateCategory(category: Category): void {
+  onUpdateCategory(category: Category, name): void {
+    category.categoryName = name;
     document.getElementById('edit-category-form').click();
     this.categoryService.putCategory(category).subscribe(
       (response: Category) => {
@@ -128,7 +129,8 @@ export class CategoryActionComponent implements OnInit {
       }
     );
   }
-  onUpdateSize(size: Size): void {
+  onUpdateSize(size: Size, name): void {
+    size.sizeName = name;
     document.getElementById('edit-size-form').click();
     this.sizeService.putSize(size).subscribe(
       (response: Size) => {

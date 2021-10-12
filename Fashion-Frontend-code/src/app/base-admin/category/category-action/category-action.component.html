@@ -16,13 +16,13 @@
                 <table class="table">
                   <thead class=" text-primary">
                   <!--                  <th>Check</th>-->
-                  <th>Mã</th>
+                  <th>STT</th>
                   <th>Tên Danh Mục</th>
                   <th class="text-right">Công cụ</th>
                   </thead>
                   <tbody style="color: black">
-                  <tr *ngFor="let category of categoryClass">
-                    <td>{{category.categoryId}}</td>
+                  <tr *ngFor="let category of categoryClass, let i = index">
+                    <td>{{i+1}}</td>
                     <td>{{category.categoryName}}</td>
                     <td class="td-actions text-right">
                       <button (click)="onOpenModal(category, 'edit')" type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
@@ -55,16 +55,16 @@
                 <table class="table">
                   <thead class=" text-primary">
                   <!--                  <th>Check</th>-->
-                  <th>Mã</th>
+                  <th>STT</th>
                   <th>Kích Cỡ</th>
                   <th class="text-right">Công cụ</th>
                   </thead>
                   <tbody style="color: black">
-                  <tr *ngFor="let size of sizeClass">
-                    <td>{{size.sizeId}}</td>
+                  <tr *ngFor="let size of sizeClass, let i = index">
+                    <td>{{i+1}}</td>
                     <td>{{size.sizeName}}</td>
                     <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                      <button (click)="onOpenModal1(size, 'edit')" type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
                         <i class="now-ui-icons ui-2_settings-90"></i>
                       </button>
                       <button (click)="onOpenModal1(size, 'delete')" type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
@@ -124,11 +124,11 @@
           <div class="form-group">
             <label for="categoryName">Tên Danh Mục</label>
             <input type="text" class="form-control"
-                 name="categoryName"  aria-describedby="emailHelp" placeholder="Name" required>
+                 name="categoryName" aria-describedby="emailHelp" placeholder="Name" required #name>
           </div>
           <div class="modal-footer">
             <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
-            <button (click)="onUpdateCategory(editForm.value)" id="edit-category-form" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+            <button (click)="onUpdateCategory(editCategory,name.value)" id="edit-category-form" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
           </div>
         </form>
       </div>
@@ -184,8 +184,32 @@
     </div>
   </div>
 </div>
-
-
+<!--edit size-->
+<div class="modal fade" id="updateEmployeeModal1" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateEmployeeModalLabel1">Chỉnh Sửa Kích cỡ {{editSize?.sizeName}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group">
+            <label for="sizeName">Tên kích cỡ</label>
+            <input type="text" class="form-control"
+                   name="sizeName" aria-describedby="emailHelp" placeholder="xx" required #name1>
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+            <button (click)="onUpdateSize(editSize, name1.value)" id="edit-size-form" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <!--delete size-->
 <div class="modal fade" id="deleteEmployeeModal1" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

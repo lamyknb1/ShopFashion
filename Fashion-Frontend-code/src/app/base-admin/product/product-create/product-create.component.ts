@@ -57,11 +57,17 @@ export class ProductCreateComponent implements OnInit {
     this.category = [];
     this.supplier = [];
   }
+  onSelectFile(event) {
+    this.useFile = [];
+    this.useFile = event.srcElement.files;
+    console.log(this.useFile);
+    this.preview();
+  }
   onSubmit() {
     if (this.productForm.valid) {
       const {value} = this.productForm;
       this.product = value;
-      for (const preview of this.previewUrl) {
+      for (const preview of this.useFile) {
         this.pictureService.postPicture(preview).subscribe(
           next => {
             this.picture.push({
@@ -87,12 +93,7 @@ export class ProductCreateComponent implements OnInit {
       this.router.navigate(['admin', 'home']);
     });
   }
-  onSelectFile(event) {
-    this.useFile = [];
-    this.useFile = event.srcElement.files;
-    console.log(this.useFile);
-    this.preview();
-  }
+
   preview() {
     // Show preview
     for (let i = 0; i < this.useFile.length; i++) {

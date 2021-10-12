@@ -22,7 +22,8 @@ export class ProductActionComponent implements OnInit {
   // page
   private page = 1;
   private totalPage: number;
-  private productPage: Product[];
+  public productPage: Product[] = [];
+  private listProductNotPage: Product[];
   private notification: string;
   pageItem = [];
 
@@ -39,6 +40,15 @@ export class ProductActionComponent implements OnInit {
 
   ngOnInit(): void {
     this.pageListProduct();
+    // this.subscription = this.productService.getListProduct().subscribe(
+    //   (data: Product[]) => {
+    //     this.listProductNotPage = data;
+    //     // tslint:disable-next-line:triple-equals
+    //     if ((this.listProductNotPage.length % 6) != 0) {
+    //       this.totalPage = (Math.round(this.listProductNotPage.length / 6)) + 1;
+    //     }
+    //   }
+    // );
   }
   pageListProduct() {
     this.subscription = this.productService.getPageProduct(this.page).subscribe(
@@ -51,7 +61,7 @@ export class ProductActionComponent implements OnInit {
         console.log(error);
       }
     );
-    this.pageItem = Array(length = this.totalPage);
+    this.pageItem = Array(length = this.totalPage );
   }
   setPage(pages: number) {
     this.page = pages;
@@ -70,8 +80,8 @@ export class ProductActionComponent implements OnInit {
     this.pageListProduct();
   }
   nextPage() {
-    if (this.page > this.totalPage) {
-      this.page = this.totalPage - 1;
+    if (this.page >= this.totalPage) {
+      this.page = this.totalPage;
     } else {
       this.page = this.page + 1;
     }
@@ -107,7 +117,6 @@ export class ProductActionComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
     dialogConfig.height = '80%';
-
     this.dialog.open(ProductCreateComponent, dialogConfig);
   }
 

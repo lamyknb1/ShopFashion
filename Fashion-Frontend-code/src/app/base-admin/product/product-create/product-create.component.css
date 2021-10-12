@@ -1,3 +1,7 @@
+.mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
+}
+
 .example-form {
   min-width: 150px;
   max-width: 300px;
@@ -14,3 +18,4 @@
   overflow-y: inherit !important;
   padding: 0px !important;
 }
+

@@ -9,6 +9,7 @@ import {PictureService} from '../../../services/picture.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../services/product.service';
 import {TokenStorageService} from '../../../auth/service-auth/token-storage.service';
+import {Picture} from '../../../models/Picture';
 
 @Component({
   selector: 'app-product-update',
@@ -29,6 +30,7 @@ export class ProductUpdateComponent implements OnInit {
   quantity: any;
   supplierList: Supplier[];
   categoryList: Category[];
+  listpicture = [];
   constructor(
               private categoryService: CategoryService,
               private supplierService: SupplierService,
@@ -41,7 +43,7 @@ export class ProductUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
-      id: '',
+      productId: '',
       name: ['', [Validators.required, Validators.minLength(1)]],
       price: ['', [Validators.required, Validators.min(0)]],
       description: ['', [Validators.required]],
@@ -68,19 +70,21 @@ export class ProductUpdateComponent implements OnInit {
         this.product = null;
       }
     );
+    this.getpiccture(productId);
+  }
+  getpiccture(id: number) {
+    this.pictureService.getListPicture1(id).subscribe(data => {
+      this.listpicture = data;
+      console.log(data);
+    });
   }
   onSubmit() {
     if (this.productForm.valid) {
+      console.log(this.productForm);
       const {value} = this.productForm;
       this.product = value;
       for (const preview of this.previewUrl) {
-        this.pictureService.postPicture(preview).subscribe(
-          next => {
-            this.picture.push({
-              pictureId: next
-            });
-          }
-        );
+        this.productService.putProduct(this.product);
       }
     } else {
       console.log('error');
